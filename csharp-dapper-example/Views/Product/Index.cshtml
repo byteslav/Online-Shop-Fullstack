@@ -1,0 +1,20 @@
+﻿@model IEnumerable<csharp_dapper_example.Models.Product>
+
+<h2>@ViewData["Title"]</h2>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Count</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+ 
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.Name</td>
+            <td>@product.Count</td>
+            <td>@product.Price</td>
+        </tr>
+    }
+</table>
