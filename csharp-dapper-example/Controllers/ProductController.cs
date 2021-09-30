@@ -1,4 +1,5 @@
-﻿using csharp_dapper_example.Models;
+﻿using System.Threading.Tasks;
+using csharp_dapper_example.Models;
 using csharp_dapper_example.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,9 +14,9 @@ namespace csharp_dapper_example.Controllers
             _productRepository = new ProductRepository(configuration);
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var items = _productRepository.GetAll();
+            var items = await _productRepository.GetAllAsync();
             return View(items);
         }
         
@@ -25,37 +26,42 @@ namespace csharp_dapper_example.Controllers
         }
  
         [HttpPost]
-        public ActionResult Create(Product product)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(Product product)
         {
-            _productRepository.Add(product);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                await _productRepository.AddAsync(product);
+                return RedirectToAction("Index");
+            }
+
+            return View(product);
         }
 
-        public IActionResult Update(int id)
+        public async Task<IActionResult> Update(int? id)
         {
-            var product = _productRepository.GetById(id);
-            if (product == null) return NotFound();
+            var product = await _productRepository.GetByIdAsync(id);
             return View(product);
         }
 
         [HttpPost]
-        public IActionResult Update(Product product)
+        public async Task<IActionResult> Update(Product product)
         {
             if (ModelState.IsValid)
             {
-                _productRepository.Update(product);
+                await _productRepository.UpdateAsync(product);
                 return RedirectToAction("Index");
             }
             return View(product);
         }
         
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            _productRepository.Delete(id.Value);
+            await _productRepository.DeleteAsync(id.Value);
             return RedirectToAction("Index");
         }
     }

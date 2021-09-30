@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using csharp_dapper_example.Models;
 
 namespace csharp_dapper_example.Repository
 {
     public interface IRepository<T>
     {
-        void Add(T item);
-        void Delete(int id);
-        void Update(T item);
-        T GetById(int id);
-        IEnumerable<T> GetAll();
+        Task AddAsync(T item);
+        Task DeleteAsync(int id);
+        Task UpdateAsync(T item);
+        Task<Product> GetByIdAsync(int? id);
+        Task<IEnumerable<T>> GetAllAsync();
     }
 }
