@@ -2,7 +2,6 @@
 using csharp_dapper_example.Models;
 using csharp_dapper_example.Repository;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace csharp_dapper_example.Controllers
 {
@@ -57,10 +56,8 @@ namespace csharp_dapper_example.Controllers
         
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (!id.HasValue)
+                return BadRequest();
             await _productRepository.DeleteAsync(id.Value);
             return RedirectToAction("Index");
         }

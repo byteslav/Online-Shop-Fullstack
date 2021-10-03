@@ -13,7 +13,6 @@ namespace csharp_dapper_example.Repository
         public SqlProductRepository(string connectionString)
         {
             _connectionString = connectionString;
-            //_connectionString = configuration.GetValue<string>("DBInfo:ConnectionString");
         }
         private IDbConnection Connection => new NpgsqlConnection(_connectionString);
         public async Task AddAsync(Product product)
