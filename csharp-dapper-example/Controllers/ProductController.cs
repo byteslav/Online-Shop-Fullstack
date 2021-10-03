@@ -8,10 +8,10 @@ namespace csharp_dapper_example.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly ProductRepository _productRepository;
-        public ProductController(IConfiguration configuration)
+        private readonly IRepository<Product> _productRepository;
+        public ProductController(IRepository<Product> repository)
         {
-            _productRepository = new ProductRepository(configuration);
+            _productRepository = repository;
         }
 
         public async Task<IActionResult> Index()

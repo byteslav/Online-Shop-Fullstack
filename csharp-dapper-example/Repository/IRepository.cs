@@ -4,7 +4,7 @@ using csharp_dapper_example.Models;
 
 namespace csharp_dapper_example.Repository
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T: class
     {
         Task AddAsync(T item);
         Task DeleteAsync(int id);

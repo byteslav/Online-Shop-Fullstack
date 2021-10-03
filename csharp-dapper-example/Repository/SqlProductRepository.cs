@@ -3,17 +3,17 @@ using System.Data;
 using System.Threading.Tasks;
 using csharp_dapper_example.Models;
 using Dapper;
-using Microsoft.Extensions.Configuration;
 using Npgsql;
 
 namespace csharp_dapper_example.Repository
 {
-    public class ProductRepository : IRepository<Product>
+    public class SqlProductRepository : IRepository<Product>
     {
         private readonly string _connectionString;
-        public ProductRepository(IConfiguration configuration)
+        public SqlProductRepository(string connectionString)
         {
-            _connectionString = configuration.GetValue<string>("DBInfo:ConnectionString");
+            _connectionString = connectionString;
+            //_connectionString = configuration.GetValue<string>("DBInfo:ConnectionString");
         }
         private IDbConnection Connection => new NpgsqlConnection(_connectionString);
         public async Task AddAsync(Product product)

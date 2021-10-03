@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using csharp_dapper_example.Models;
+using csharp_dapper_example.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,8 +24,10 @@ namespace csharp_dapper_example
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddSingleton(Configuration);
+            string connectionString = Configuration.GetValue<string>("DBInfo:ConnectionString");
+            services.AddTransient<IRepository<Product>, SqlProductRepository>(provider => new SqlProductRepository(connectionString));
             services.AddControllersWithViews();
-            services.AddSingleton(Configuration);
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

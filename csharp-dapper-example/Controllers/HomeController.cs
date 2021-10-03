@@ -11,16 +11,17 @@ namespace csharp_dapper_example.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        // private readonly ILogger<HomeController> _logger;
+        //
+        // public HomeController(ILogger<HomeController> logger)
+        // {
+        //     _logger = logger;
+        // }
 
         public IActionResult Index()
         {
-            return View();
+            ViewData["Message"] = "Hello!";
+            return View("Index");
         }
 
         public IActionResult Privacy()
