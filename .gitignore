@@ -453,3 +453,5 @@ $RECYCLE.BIN/
 !.vscode/launch.json
 !.vscode/extensions.json
 .vscode/launch.json
+csharp-dapper-example/appsettings.Development.json
+csharp-dapper-example/appsettings.json
