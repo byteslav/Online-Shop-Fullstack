@@ -37,7 +37,7 @@ namespace csharp_dapper_example.Controllers
             return View(product);
         }
 
-        public async Task<IActionResult> Update(int? id)
+        public async Task<IActionResult> Update(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
             return View(product);

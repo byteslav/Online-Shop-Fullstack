@@ -18,8 +18,7 @@ namespace csharp_dapper_example
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = Configuration.GetValue<string>("DBInfo:ConnectionString");
-            services.AddTransient<IRepository<Product>, SqlProductRepository>(provider => new SqlProductRepository(connectionString));
+            services.AddScoped<IRepository<Product>, SqlProductRepository>();
             services.AddControllersWithViews();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

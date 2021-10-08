@@ -13,7 +13,7 @@ namespace TestProject1
     public class ProductControllerTests
     {
         [Fact]
-        public async void IndexReturnsAViewResultWithAllProducts()
+        public async Task IndexReturnsAViewResultWithAllProducts()
         {
             //Arrange
             var mock = new Mock<IRepository<Product>>();
@@ -41,7 +41,7 @@ namespace TestProject1
         }
         
         [Fact]
-        public async void AddProductReturnsViewResultWithProductModel()
+        public async Task AddProductReturnsViewResultWithProductModel()
         {
             // Arrange
             var mock = new Mock<IRepository<Product>>();
@@ -59,7 +59,7 @@ namespace TestProject1
         }
         
         [Fact]
-        public async void DeleteBadRequestResultWhenIdIsNull()
+        public async Task DeleteBadRequestResultWhenIdIsNull()
         {
             // Arrange
             var mock = new Mock<IRepository<Product>>();
@@ -73,7 +73,7 @@ namespace TestProject1
         }
         
         [Fact]
-        public async void CreateReturnsARedirectAndAdd()
+        public async Task CreateReturnsARedirectAndAdd()
         {
             // Arrange
             var mock = new Mock<IRepository<Product>>();
@@ -93,7 +93,7 @@ namespace TestProject1
         }
         
         [Fact]
-        public async void CreateReturnsViewResultWithProductModel()
+        public async Task CreateReturnsViewResultWithProductModel()
         {
             // Arrange
             var mock = new Mock<IRepository<Product>>();
