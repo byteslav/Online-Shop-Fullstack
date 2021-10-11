@@ -26,6 +26,7 @@ namespace csharp_dapper_example.Controllers
 
         public IActionResult Privacy()
         {
+            
             return View();
         }
 

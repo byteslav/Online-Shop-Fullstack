@@ -1,0 +1,26 @@
+﻿version: "3.9"
+services:
+  db:
+    image: postgres:13.4
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=chesnok2002
+      - POSTGRES_DB=DapperDb
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - "5432"
+    volumes:
+      - ./pgData:/var/lib/postgresql/data/pgdata
+  server:
+    build: .
+    container_name: application
+    ports:
+      - "80:80"
+    links:
+      - db
+    depends_on:
+      - db
+
+volumes:
+  pgData:
+  

@@ -28,7 +28,7 @@ namespace csharp_dapper_example.Repository
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
             using IDbConnection dbConnection = Connection;
-            var sQuery = @"SELECT * FROM Products";
+            var sQuery = @"SELECT * FROM products";
 
             var result = await dbConnection.QueryAsync<Product>(sQuery);
             return result;
