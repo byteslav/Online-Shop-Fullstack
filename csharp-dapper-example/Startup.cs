@@ -1,5 +1,7 @@
+using System.Reflection;
 using csharp_dapper_example.Models;
 using csharp_dapper_example.Repository;
+using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +22,13 @@ namespace csharp_dapper_example
         {
             services.AddScoped<IRepository<Product>, SqlProductRepository>();
             services.AddControllersWithViews();
+
+            services.AddFluentMigratorCore()
+                .ConfigureRunner(configure =>
+                    configure.AddPostgres()
+                        .WithGlobalConnectionString(Configuration.GetValue<string>("DBInfo:ConnectionString"))
+                        .ScanIn(Assembly.GetExecutingAssembly()).For.All())
+                .AddLogging(configure => configure.AddFluentMigratorConsole());
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -46,6 +55,10 @@ namespace csharp_dapper_example
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            using var scope = app.ApplicationServices.CreateScope();
+            var migrator = scope.ServiceProvider.GetService<IMigrationRunner>();
+            migrator.MigrateUp();
         }
     }
 }
