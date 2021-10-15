@@ -7,8 +7,6 @@ services:
       - POSTGRES_PASSWORD=chesnok2002
       - POSTGRES_DB=DapperDb
       - PGDATA=/var/lib/postgresql/data/pgdata
-    networks:
-      - app-network
     ports:
       - "5432"
     volumes:
@@ -18,16 +16,8 @@ services:
     container_name: application
     ports:
       - "80:80"
-    links:
-      - db
     depends_on:
       - db
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
 
 volumes:
   pgData:
