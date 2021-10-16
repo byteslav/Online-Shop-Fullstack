@@ -6,11 +6,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=chesnok2002
       - POSTGRES_DB=DapperDb
-      - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
       - "5432"
-    volumes:
-      - ./pgData:/var/lib/postgresql/data/pgdata
   server:
     build: .
     container_name: application
@@ -18,7 +15,4 @@ services:
       - "80:80"
     depends_on:
       - db
-
-volumes:
-  pgData:
   
