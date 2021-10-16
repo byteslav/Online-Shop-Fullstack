@@ -15,6 +15,7 @@ During the development of such a pet-project, I had time to work with some techn
 + Dapper micro-orm
 + Moq framework
 + Docker
++ FluentMigrator
 
 ____________________________________________
 
@@ -24,10 +25,14 @@ The project involves the client interacting with the server by sending and proce
 + Getting data about existing products and their features
 + Changing product features
 + Removing a product
-  ![List of Products](csharp-dapper-example/ReadmePictures/read1.jpg)
-  ![Creating new Product](csharp-dapper-example/ReadmePictures/read2.jpg)
 
 ____________________________________________
 
+### :whale: *Docker Run Service*
+1. Clone repository with ```git clone https://github.com/azaza12345/csharp-dapper-example```
+2. Run ```docker-compose up``` in console
+3. Try service on http://localhost:8080/product
+
+____________________________________________
 ### :checkered_flag: *P.S.*
 Thank you for reviewing this simple project!
