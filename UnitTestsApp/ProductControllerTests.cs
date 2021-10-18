@@ -12,13 +12,13 @@ namespace TestProject1
 {
     public class ProductControllerTests
     {
+        private readonly Mock<IRepository<Product>> _mock = new Mock<IRepository<Product>>();
         [Fact]
         public async Task IndexReturnsAViewResultWithAllProducts()
         {
             //Arrange
-            var mock = new Mock<IRepository<Product>>();
-            mock.Setup(repo=>repo.GetAllAsync()).Returns(GetProducts);
-            var controller = new ProductController(mock.Object);
+            _mock.Setup(repo=>repo.GetAllAsync()).Returns(GetProducts);
+            var controller = new ProductController(_mock.Object);
             
             // Act
             var result = await controller.Index();
@@ -44,8 +44,7 @@ namespace TestProject1
         public async Task AddProductReturnsViewResultWithProductModel()
         {
             // Arrange
-            var mock = new Mock<IRepository<Product>>();
-            var controller = new ProductController(mock.Object);
+            var controller = new ProductController(_mock.Object);
             controller.ModelState.AddModelError("Name", "Required");
             var newProduct = new Product();
  
@@ -62,8 +61,7 @@ namespace TestProject1
         public async Task DeleteBadRequestResultWhenIdIsNull()
         {
             // Arrange
-            var mock = new Mock<IRepository<Product>>();
-            var controller = new ProductController(mock.Object);
+            var controller = new ProductController(_mock.Object);
  
             // Act
             var result = await controller.Delete(null);
@@ -76,8 +74,7 @@ namespace TestProject1
         public async Task CreateReturnsARedirectAndAdd()
         {
             // Arrange
-            var mock = new Mock<IRepository<Product>>();
-            var controller = new ProductController(mock.Object);
+            var controller = new ProductController(_mock.Object);
             var newProduct = new Product
             {
                 Name = "Tea"
@@ -89,15 +86,14 @@ namespace TestProject1
             // Assert
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", redirectToActionResult.ActionName);
-            mock.Verify(repository => repository.AddAsync(newProduct));
+            _mock.Verify(repository => repository.AddAsync(newProduct));
         }
         
         [Fact]
         public async Task CreateReturnsViewResultWithProductModel()
         {
             // Arrange
-            var mock = new Mock<IRepository<Product>>();
-            var controller = new ProductController(mock.Object);
+            var controller = new ProductController(_mock.Object);
             controller.ModelState.AddModelError("Name", "Required");
             var newProduct = new Product();
  
