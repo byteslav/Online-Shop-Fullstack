@@ -21,6 +21,7 @@ namespace CsharpDapperExample
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IRepository<Product>, SqlProductRepository>();
+            services.AddScoped<IRepository<Category>, SqlCategoryRepository>();
             services.AddControllersWithViews();
 
             services.AddFluentMigratorCore()

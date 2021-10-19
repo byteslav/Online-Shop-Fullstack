@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CsharpDapperExample.Models
 {
@@ -14,5 +15,10 @@ namespace CsharpDapperExample.Models
         [Required]
         [Range(0, int.MaxValue)]
         public float Price { get; set; }
+
+        [Display(Name = "CategoryType")]
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public virtual Category Category { get; set; }
     }
 }

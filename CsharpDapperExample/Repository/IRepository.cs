@@ -9,7 +9,7 @@ namespace CsharpDapperExample.Repository
         Task AddAsync(T item);
         Task DeleteAsync(int id);
         Task UpdateAsync(T item);
-        Task<Product> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(int id);
         Task<IEnumerable<T>> GetAllAsync();
     }
 }
