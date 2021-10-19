@@ -1,0 +1,30 @@
+﻿@model CsharpDapperExample.Models.Product
+ 
+@{
+    ViewData["Title"] = "New Product";
+}
+<h2>@ViewData["Title"]</h2>
+ 
+<form asp-controller="Products" asp-action="Create">
+    <div>
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input type="text" asp-for="Name" class="form-control form-control-sm"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Count"></label>
+            <input asp-for="Count" class="form-control  form-control-sm" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Price"></label>
+            <input asp-for="Price" class="form-control  form-control-sm" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-outline-secondary" />
+        </div>
+    </div>
+</form>
+ 
+<div>
+    <a asp-controller="Products" asp-action="Index">Go Back</a>
+</div>

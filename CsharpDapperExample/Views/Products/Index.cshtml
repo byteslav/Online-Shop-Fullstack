@@ -1,0 +1,25 @@
+﻿@model IEnumerable<CsharpDapperExample.Models.Product>
+
+<h2>@ViewData["Title"]</h2>
+<p>
+    <a asp-controller="Products" asp-action="Create">Add</a>
+</p>
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Count</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+ 
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.Name</td>
+            <td>@product.Count</td>
+            <td>@product.Price</td>
+            <td> <a asp-action="Update" asp-route-id="@product.Id">Update</a></td>
+            <td> <a asp-action="Delete" asp-route-id="@product.Id">Delete</a> </td>
+        </tr>
+    }
+</table>

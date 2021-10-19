@@ -18,7 +18,7 @@ namespace TestProject1
         {
             //Arrange
             _mock.Setup(repo=>repo.GetAllAsync()).Returns(GetProducts);
-            var controller = new ProductController(_mock.Object);
+            var controller = new ProductsController(_mock.Object);
             
             // Act
             var result = await controller.Index();
@@ -44,7 +44,7 @@ namespace TestProject1
         public async Task AddProductReturnsViewResultWithProductModel()
         {
             // Arrange
-            var controller = new ProductController(_mock.Object);
+            var controller = new ProductsController(_mock.Object);
             controller.ModelState.AddModelError("Name", "Required");
             var newProduct = new Product();
  
@@ -61,7 +61,7 @@ namespace TestProject1
         public async Task DeleteBadRequestResultWhenIdIsNull()
         {
             // Arrange
-            var controller = new ProductController(_mock.Object);
+            var controller = new ProductsController(_mock.Object);
  
             // Act
             var result = await controller.Delete(null);
@@ -74,11 +74,8 @@ namespace TestProject1
         public async Task CreateReturnsARedirectAndAdd()
         {
             // Arrange
-            var controller = new ProductController(_mock.Object);
-            var newProduct = new Product
-            {
-                Name = "Tea"
-            };
+            var controller = new ProductsController(_mock.Object);
+            var newProduct = new Product { Name = "Tea" };
  
             // Act
             var result = await controller.Create(newProduct);
@@ -93,7 +90,7 @@ namespace TestProject1
         public async Task CreateReturnsViewResultWithProductModel()
         {
             // Arrange
-            var controller = new ProductController(_mock.Object);
+            var controller = new ProductsController(_mock.Object);
             controller.ModelState.AddModelError("Name", "Required");
             var newProduct = new Product();
  

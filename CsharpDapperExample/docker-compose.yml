@@ -1,0 +1,18 @@
+﻿version: "3.9"
+services:
+  db:
+    image: postgres:13.4
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=chesnok2002
+      - POSTGRES_DB=DapperDb
+    ports:
+      - "5432"
+  server:
+    build: .
+    container_name: application
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+  
