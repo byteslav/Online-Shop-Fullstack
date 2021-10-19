@@ -29,8 +29,8 @@ The project involves the client interacting with the server by sending and proce
 ____________________________________________
 
 ### :whale: *Docker Run Service*
-1. Clone repository with ```git clone https://github.com/azaza12345/csharp-dapper-example```
-2. Go to folder with compose file ```cd csharp-dapper-example/csharp-dapper-example```
+1. Clone repository with ```git clone https://github.com/azaza12345/CsharpDapperExample```
+2. Go to folder with compose file ```cd CsharpDapperExample/CsharpDapperExample```
 3. Run ```docker-compose up``` in console
 4. Try service on http://localhost/product
 

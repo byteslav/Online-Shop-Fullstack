@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using csharp_dapper_example.Controllers;
-using csharp_dapper_example.Models;
-using csharp_dapper_example.Repository;
+using CsharpDapperExample.Controllers;
+using CsharpDapperExample.Models;
+using CsharpDapperExample.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
 using Moq;
