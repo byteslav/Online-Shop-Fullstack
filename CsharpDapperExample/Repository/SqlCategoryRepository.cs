@@ -19,41 +19,41 @@ namespace CsharpDapperExample.Repository
         public async Task AddAsync(Category category)
         {
             using IDbConnection dbConnection = Connection;
-            var sQuery = @"INSERT INTO category (Name) VALUES (@Name)";
+            var sqlQuery = @"INSERT INTO category (Name) VALUES (@Name)";
 
-            await dbConnection.ExecuteAsync(sQuery, category);
+            await dbConnection.ExecuteAsync(sqlQuery, category);
         }
 
         public async Task<IEnumerable<Category>> GetAllAsync()
         {
             using IDbConnection dbConnection = Connection;
-            var sQuery = @"SELECT * FROM category";
+            var sqlQuery = @"SELECT * FROM category";
 
-            var result = await dbConnection.QueryAsync<Category>(sQuery);
+            var result = await dbConnection.QueryAsync<Category>(sqlQuery);
             return result;
         }
         
         public async Task<Category> GetByIdAsync(int id)
         {
             using IDbConnection dbConnection = Connection;
-            var sQuery = @"SELECT * FROM category WHERE Id = @Id";
+            var sqlQuery = @"SELECT * FROM category WHERE Id = @Id";
 
-            var result = await dbConnection.QueryFirstOrDefaultAsync<Category>(sQuery, new {Id = id});
+            var result = await dbConnection.QueryFirstOrDefaultAsync<Category>(sqlQuery, new {Id = id});
             return result;
         }
         public async Task DeleteAsync(int id)
         {
             using IDbConnection dbConnection = Connection;
-            var sQuery = @"DELETE FROM category WHERE Id = @Id";
+            var sqlQuery = @"DELETE FROM category WHERE Id = @Id";
 
-            await dbConnection.ExecuteAsync(sQuery, new { Id = id });
+            await dbConnection.ExecuteAsync(sqlQuery, new { Id = id });
         }
         public async Task UpdateAsync(Category category)
         {
             using IDbConnection dbConnection = Connection;
-            var sQuery = @"UPDATE category SET Name = @Name WHERE Id = @Id";
+            var sqlQuery = @"UPDATE category SET Name = @Name WHERE Id = @Id";
 
-            await dbConnection.QueryAsync(sQuery, category);
+            await dbConnection.QueryAsync(sqlQuery, category);
         }
     }
 }

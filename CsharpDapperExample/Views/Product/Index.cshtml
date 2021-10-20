@@ -2,13 +2,14 @@
 
 <h2>@ViewData["Title"]</h2>
 <p>
-    <a asp-controller="Products" asp-action="Create">Add</a>
+    <a asp-controller="Product" asp-action="Create">Add</a>
 </p>
 <table class="table">
     <tr>
         <th>Name</th>
         <th>Count</th>
         <th>Price</th>
+        <th>Category</th>
         <th></th>
     </tr>
  
@@ -18,6 +19,7 @@
             <td>@product.Name</td>
             <td>@product.Count</td>
             <td>@product.Price</td>
+            <td>@product.Category.Name</td>
             <td> <a asp-action="Update" asp-route-id="@product.Id">Update</a></td>
             <td> <a asp-action="Delete" asp-route-id="@product.Id">Delete</a> </td>
         </tr>

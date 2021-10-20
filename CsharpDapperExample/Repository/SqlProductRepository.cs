@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using CsharpDapperExample.Models;
 using Dapper;
@@ -19,41 +20,45 @@ namespace CsharpDapperExample.Repository
         public async Task AddAsync(Product product)
         {
             using IDbConnection dbConnection = Connection;
-            var sQuery = @"INSERT INTO products (Name, Count, Price) VALUES (@Name, @Count, @Price)";
+            var sqlQuery = @"INSERT INTO products (name, count, price, categoryid) VALUES (@Name, @Count, @Price, @CategoryId)";
 
-            await dbConnection.ExecuteAsync(sQuery, product);
+            await dbConnection.ExecuteAsync(sqlQuery, product);
         }
 
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
             using IDbConnection dbConnection = Connection;
-            var sQuery = @"SELECT * FROM products";
-
-            var result = await dbConnection.QueryAsync<Product>(sQuery);
+            
+            var sqlQuery = @"SELECT p.id, p.name, p.count, p.price, p.categoryid, c.name FROM products p INNER JOIN category c ON p.categoryid = c.id";
+            var result = await dbConnection.QueryAsync<Product, Category, Product>(sqlQuery, (product, category) => {
+                    product.Category = category;
+                    return product;
+                }, splitOn: "categoryid");
+            
             return result;
         }
         
         public async Task<Product> GetByIdAsync(int id)
         {
             using IDbConnection dbConnection = Connection;
-            var sQuery = @"SELECT * FROM products WHERE Id = @Id";
+            var sqlQuery = @"SELECT * FROM products WHERE Id = @Id";
 
-            var result = await dbConnection.QueryFirstOrDefaultAsync<Product>(sQuery, new {Id = id});
+            var result = await dbConnection.QueryFirstOrDefaultAsync<Product>(sqlQuery, new {Id = id});
             return result;
         }
         public async Task DeleteAsync(int id)
         {
             using IDbConnection dbConnection = Connection;
-            var sQuery = @"DELETE FROM products WHERE Id = @Id";
+            var sqlQuery = @"DELETE FROM products WHERE Id = @Id";
 
-            await dbConnection.ExecuteAsync(sQuery, new { Id = id });
+            await dbConnection.ExecuteAsync(sqlQuery, new { Id = id });
         }
         public async Task UpdateAsync(Product product)
         {
             using IDbConnection dbConnection = Connection;
-            var sQuery = @"UPDATE products SET Name = @Name, Count = @Count, Price = @Price WHERE Id = @Id";
+            var sqlQuery = @"UPDATE products SET Name = @Name, Count = @Count, Price = @Price, categoryid = @CategoryId WHERE Id = @Id";
 
-            await dbConnection.QueryAsync(sQuery, product);
+            await dbConnection.QueryAsync(sqlQuery, product);
         }
     }
 }

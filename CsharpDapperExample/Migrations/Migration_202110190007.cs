@@ -2,20 +2,20 @@
 
 namespace CsharpDapperExample.Migrations
 {
-    [Migration(202110190001)]
-    public class Migration_202110190001 : Migration
+    [Migration(202110190007)]
+    public class Migration_202110190007 : Migration
     {
         public override void Up()
         {
             Create.Table("category")
                 .WithColumn("id").AsInt32().NotNullable().PrimaryKey().Identity()
-                .WithColumn("name").AsString().NotNullable();
+                .WithColumn("name").AsString();
             Create.Table("products")
                 .WithColumn("id").AsInt32().NotNullable().PrimaryKey().Identity()
                 .WithColumn("name").AsString().NotNullable()
                 .WithColumn("count").AsInt32().NotNullable()
                 .WithColumn("price").AsInt32().NotNullable()
-                .WithColumn("categoryId").AsInt32().ForeignKey("category", "id")
+                .WithColumn("categoryid").AsInt32().ForeignKey("category", "id")
                 .WithColumn("category").AsString();
         }
 

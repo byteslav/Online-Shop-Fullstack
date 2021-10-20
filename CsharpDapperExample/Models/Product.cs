@@ -16,7 +16,7 @@ namespace CsharpDapperExample.Models
         [Range(0, int.MaxValue)]
         public float Price { get; set; }
 
-        [Display(Name = "CategoryType")]
+        [Display(Name = "Category Type")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
