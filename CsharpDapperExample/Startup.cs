@@ -23,6 +23,12 @@ namespace CsharpDapperExample
             services.AddScoped<IRepository<Product>, SqlProductRepository>();
             services.AddScoped<IRepository<Category>, SqlCategoryRepository>();
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
+            services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
             services.AddFluentMigratorCore()
                 .ConfigureRunner(configure =>
@@ -49,7 +55,7 @@ namespace CsharpDapperExample
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

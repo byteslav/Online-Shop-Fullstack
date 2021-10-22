@@ -30,10 +30,11 @@ namespace CsharpDapperExample.Repository
             using IDbConnection dbConnection = Connection;
             
             var sqlQuery = @"SELECT p.id, p.name, p.count, p.price, p.categoryid, c.name FROM products p INNER JOIN category c ON p.categoryid = c.id";
-            var result = await dbConnection.QueryAsync<Product, Category, Product>(sqlQuery, (product, category) => {
-                    product.Category = category;
-                    return product;
-                }, splitOn: "categoryid");
+            var result = await dbConnection.QueryAsync<Product, Category, Product>(sqlQuery, (product, category) =>
+            {
+                product.Category = category;
+                return product;
+            }, splitOn: "categoryid");
             
             return result;
         }

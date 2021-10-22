@@ -1,8 +1,31 @@
-﻿@model string
-@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model CsharpDapperExample.ViewModels.HomeViewModel
 
 <div class="text-center">
-    <h1 class="display-4">Home Page</h1>
+    <button class="btn btn-outline-dark" data-filter="all">All</button>
+    @foreach (var c in Model.Categories)
+    {
+        <button class="btn btn-outline-secondary" data-filter="@c.Name">@c.Name</button>
+    }
+</div>
+<br/>
+
+<div>
+    <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th></th>
+                </tr>
+     
+                @foreach (var product in Model.Products)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td>@product.Price</td>
+                        <td>@product.Category.Name</td>
+                        @* <td> <a asp-action="AddToCart" asp-route-id="@product.Id">Update</a></td> *@
+                    </tr>
+                }
+            </table>
 </div>

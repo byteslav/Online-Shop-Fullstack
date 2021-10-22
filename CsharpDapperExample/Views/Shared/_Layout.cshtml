@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using CsharpDapperExample.Utility
+@inject IHttpContextAccessor HttpContextAccessor;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -22,7 +26,24 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        @if (HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart) != null)
+                        {
+                            <a asp-action="Index" asp-controller="Cart" class="nav-link text-dark">
+                                @{
+                                    var count = HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart).Count;
+                                }
+                                <p>Cart (@count)</p>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="#" class="nav-link text-dark">
+                                <p>Cart (0)</p>
+                            </a>
+                        }
                     </li>
                 </ul>
             </div>
