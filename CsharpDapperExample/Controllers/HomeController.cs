@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CsharpDapperExample.Models;
 using CsharpDapperExample.Repository;
+using CsharpDapperExample.Utility;
 using CsharpDapperExample.ViewModels;
+using NUnit.Framework;
 
 namespace CsharpDapperExample.Controllers
 {
@@ -32,6 +34,25 @@ namespace CsharpDapperExample.Controllers
                 Categories = await _categoryRepository.GetAllAsync()
             };
             return View(homeViewModel);
+        }
+
+        public async Task<IActionResult> AddToCart(int id)
+        {
+            var shoppingCartList = new List<ShoppingCart>();
+            var session = HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstants.SessionCart);
+            if (session != null && session.Any())
+            {
+                shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart);
+            }
+            shoppingCartList.Add(new ShoppingCart{ProductId = id});
+            
+            var product = await _productRepository.GetByIdAsync(id);
+            product.Count--;
+            await _productRepository.UpdateAsync(product);
+            
+            HttpContext.Session.Set(WebConstants.SessionCart, shoppingCartList);
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()

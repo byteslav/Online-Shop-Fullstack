@@ -71,7 +71,7 @@ namespace CsharpDapperExample.Controllers
                 await _productRepository.UpdateAsync(product);
                 return RedirectToAction("Index");
             }
-            var productViewModel = new ProductViewModel()
+            var productViewModel = new ProductViewModel
             {
                 Product = product,
                 CategorySelectList = await GetCategoriesListAsync()
@@ -84,7 +84,7 @@ namespace CsharpDapperExample.Controllers
             if (!id.HasValue)
                 return BadRequest();
             await _productRepository.DeleteAsync(id.Value);
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         private async Task<IEnumerable<SelectListItem>> GetCategoriesListAsync()
@@ -98,5 +98,4 @@ namespace CsharpDapperExample.Controllers
             return categoryDropDown;
         }
     }
-    
 }

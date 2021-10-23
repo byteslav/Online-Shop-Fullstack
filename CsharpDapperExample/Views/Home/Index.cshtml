@@ -11,21 +11,35 @@
 
 <div>
     <table class="table">
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Category</th>
-                    <th></th>
-                </tr>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th></th>
+        </tr>
      
-                @foreach (var product in Model.Products)
-                {
-                    <tr>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    @if (product.Count > 0)
+                    {
                         <td>@product.Name</td>
                         <td>@product.Price</td>
                         <td>@product.Category.Name</td>
-                        @* <td> <a asp-action="AddToCart" asp-route-id="@product.Id">Update</a></td> *@
-                    </tr>
-                }
-            </table>
+                        <td> <a asp-action="AddToCart" asp-route-id="@product.Id">Add To Cart</a></td>
+                        // else
+                        // {
+                        //     <td> <a asp-action="RemoveFromCart" asp-route-id="@product.Id">Remove From Cart</a></td>
+                        // }
+                    }
+                    else
+                    {
+                        <td>The product "@product.Name" is out of stock</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    }
+                </tr>
+            }
+    </table>
 </div>
