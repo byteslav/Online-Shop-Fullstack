@@ -1,0 +1,15 @@
+﻿@model CsharpDapperExample.ViewModels.DetailsViewModel
+
+<h2>@Model.Product.Name - $@Model.Product.Price</h2>
+
+<br>
+@Model.Product.Description
+<br>
+@if (!Model.IsExistInCart)
+{
+    <td> <a asp-action="AddToCart" asp-route-id="@Model.Product.Id">Add To Cart</a></td>
+}
+else
+{
+    <td> <a asp-action="RemoveFromCart" asp-route-id="@Model.Product.Id">Remove From Cart</a></td>
+}

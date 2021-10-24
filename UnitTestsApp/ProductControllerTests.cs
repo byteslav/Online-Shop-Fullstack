@@ -33,9 +33,9 @@ namespace TestProject1
         {
             var products = new List<Product>
             {
-                new Product { Id=1, Name="Bread", Count= 35, Price = 100},
-                new Product { Id=2, Name="Milk", Count= 29, Price = 70},
-                new Product { Id=3, Name="Salad", Count= 32, Price = 30}
+                new Product { Id=1, Name="Bread", Description= 35, Price = 100},
+                new Product { Id=2, Name="Milk", Description= 29, Price = 70},
+                new Product { Id=3, Name="Salad", Description= 32, Price = 30}
             };
             return products;
         }

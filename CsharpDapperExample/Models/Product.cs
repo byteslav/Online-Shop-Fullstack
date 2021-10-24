@@ -11,10 +11,9 @@ namespace CsharpDapperExample.Models
         public string Name { get; set; }
         [Required]
         [Range(0, int.MaxValue)]
-        public int Count { get; set; }
-        [Required]
-        [Range(0, int.MaxValue)]
         public float Price { get; set; }
+        [Required]
+        public string Description { get; set; }
 
         [Display(Name = "Category Type")]
         public int CategoryId { get; set; }

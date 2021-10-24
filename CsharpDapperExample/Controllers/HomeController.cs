@@ -1,58 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using CsharpDapperExample.Models;
-using CsharpDapperExample.Repository;
-using CsharpDapperExample.Utility;
-using CsharpDapperExample.ViewModels;
-using NUnit.Framework;
+using CsharpDapperExample.Services;
+using CsharpDapperExample.Services.Interfaces;
 
 namespace CsharpDapperExample.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IRepository<Product> _productRepository;
-        private readonly IRepository<Category> _categoryRepository;
+        private readonly IHomeService _homeService;
         
-        public HomeController(ILogger<HomeController> logger, IRepository<Product> productRepository, IRepository<Category> categoryRepository)
+        public HomeController(IHomeService homeService)
         {
-            _logger = logger;
-            _productRepository = productRepository;
-            _categoryRepository = categoryRepository;
+            _homeService = homeService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var homeViewModel = new HomeViewModel
-            {
-                Products = await _productRepository.GetAllAsync(),
-                Categories = await _categoryRepository.GetAllAsync()
-            };
+            var homeViewModel = await _homeService.GetHomeViewModelAsync();
             return View(homeViewModel);
         }
 
-        public async Task<IActionResult> AddToCart(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var shoppingCartList = new List<ShoppingCart>();
-            var session = HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstants.SessionCart);
-            if (session != null && session.Any())
-            {
-                shoppingCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart);
-            }
-            shoppingCartList.Add(new ShoppingCart{ProductId = id});
-            
-            var product = await _productRepository.GetByIdAsync(id);
-            product.Count--;
-            await _productRepository.UpdateAsync(product);
-            
-            HttpContext.Session.Set(WebConstants.SessionCart, shoppingCartList);
+            var details = await _homeService.GetDetailsViewModelAsync(id);
+            return View(details);
+        }
 
-            return RedirectToAction("Index");
+        public IActionResult AddToCart(int id)
+        {
+            _homeService.AddToCart(id);
+            return RedirectToAction(nameof(Index));
+        }
+        
+        public IActionResult RemoveFromCart(int id)
+        {
+            _homeService.RemoveFromCart(id);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

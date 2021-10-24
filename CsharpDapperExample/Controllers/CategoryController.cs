@@ -1,21 +1,23 @@
 ﻿using System.Threading.Tasks;
 using CsharpDapperExample.Models;
 using CsharpDapperExample.Repository;
+using CsharpDapperExample.Services;
+using CsharpDapperExample.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CsharpDapperExample.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly IRepository<Category> _categoryRepository;
-        public CategoryController(IRepository<Category> repository)
+        private readonly ICategoryService _categoryService;
+        public CategoryController(ICategoryService categoryService)
         {
-            _categoryRepository = repository;
+            _categoryService = categoryService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var categories = await _categoryRepository.GetAllAsync();
+            var categories = await _categoryService.GetAllCategoriesAsync();
             return View(categories);
         }
         
@@ -30,17 +32,16 @@ namespace CsharpDapperExample.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _categoryRepository.AddAsync(category);
-                return RedirectToAction("Index");
+                await _categoryService.CreateCategoryAsync(category);
+                return RedirectToAction(nameof(Index));
             }
-
             return View(category);
         }
 
         public async Task<IActionResult> Update(int id)
         {
-            var product = await _categoryRepository.GetByIdAsync(id);
-            return View(product);
+            var category = await _categoryService.GetCategoryByIdAsync(id);
+            return View(category);
         }
 
         [HttpPost]
@@ -48,18 +49,16 @@ namespace CsharpDapperExample.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _categoryRepository.UpdateAsync(category);
-                return RedirectToAction("Index");
+                await _categoryService.UpdateCategoryAsync(category);
+                return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
         
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (!id.HasValue)
-                return BadRequest();
-            await _categoryRepository.DeleteAsync(id.Value);
-            return RedirectToAction("Index");
+            await _categoryService.DeleteCategoryAsync(id);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace CsharpDapperExample.Repository
         public async Task AddAsync(Product product)
         {
             using IDbConnection dbConnection = Connection;
-            var sqlQuery = @"INSERT INTO products (name, count, price, categoryid) VALUES (@Name, @Count, @Price, @CategoryId)";
+            var sqlQuery = @"INSERT INTO products (name, price, description, categoryid) VALUES (@Name, @Price, @Description, @CategoryId)";
 
             await dbConnection.ExecuteAsync(sqlQuery, product);
         }
@@ -29,7 +29,7 @@ namespace CsharpDapperExample.Repository
         {
             using IDbConnection dbConnection = Connection;
             
-            var sqlQuery = @"SELECT p.id, p.name, p.count, p.price, p.categoryid, c.name FROM products p INNER JOIN category c ON p.categoryid = c.id";
+            var sqlQuery = @"SELECT p.id, p.name, p.price, p.description, p.categoryid, c.name FROM products p INNER JOIN category c ON p.categoryid = c.id";
             var result = await dbConnection.QueryAsync<Product, Category, Product>(sqlQuery, (product, category) =>
             {
                 product.Category = category;
@@ -57,7 +57,7 @@ namespace CsharpDapperExample.Repository
         public async Task UpdateAsync(Product product)
         {
             using IDbConnection dbConnection = Connection;
-            var sqlQuery = @"UPDATE products SET Name = @Name, Count = @Count, Price = @Price, categoryid = @CategoryId WHERE Id = @Id";
+            var sqlQuery = @"UPDATE products SET Name = @Name, Price = @Price, Description = @Description, categoryid = @CategoryId WHERE Id = @Id";
 
             await dbConnection.QueryAsync(sqlQuery, product);
         }
