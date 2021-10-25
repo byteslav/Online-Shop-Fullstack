@@ -42,10 +42,14 @@ namespace CsharpDapperExample.Repository
         public async Task<Product> GetByIdAsync(int id)
         {
             using IDbConnection dbConnection = Connection;
-            var sqlQuery = @"SELECT * FROM products WHERE Id = @Id";
+            var sqlQuery = @"SELECT p.id, p.name, p.price, p.description, p.categoryid, c.name FROM products p INNER JOIN category c ON p.categoryid = c.id WHERE p.id = @Id";
+            var result = await dbConnection.QueryAsync<Product, Category, Product>(sqlQuery, (product, category) =>
+            {
+                product.Category = category;
+                return product;
+            }, splitOn: "categoryid", param: new {Id = id});
 
-            var result = await dbConnection.QueryFirstOrDefaultAsync<Product>(sqlQuery, new {Id = id});
-            return result;
+            return result.FirstOrDefault();
         }
         public async Task DeleteAsync(int id)
         {

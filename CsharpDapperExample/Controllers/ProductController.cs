@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using CsharpDapperExample.Models;
-using CsharpDapperExample.Services;
 using CsharpDapperExample.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

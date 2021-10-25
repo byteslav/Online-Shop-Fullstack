@@ -27,6 +27,7 @@ namespace CsharpDapperExample
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<ICartService, CartService>();
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddSession(options =>

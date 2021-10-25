@@ -1,9 +1,10 @@
-﻿using FluentMigrator;
+﻿using System.Data;
+using FluentMigrator;
 
 namespace CsharpDapperExample.Migrations
 {
-    [Migration(202110230001)]
-    public class Migration_202110230001 : Migration
+    [Migration(202110230003)]
+    public class Migration_202110230003 : Migration
     {
         public override void Up()
         {
@@ -15,7 +16,7 @@ namespace CsharpDapperExample.Migrations
                 .WithColumn("name").AsString().NotNullable()
                 .WithColumn("price").AsInt32().NotNullable()
                 .WithColumn("description").AsString().NotNullable()
-                .WithColumn("categoryid").AsInt32().ForeignKey("category", "id");
+                .WithColumn("categoryid").AsInt32().ForeignKey("category", "id").OnDelete(Rule.Cascade);
         }
 
         public override void Down()

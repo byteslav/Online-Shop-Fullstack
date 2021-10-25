@@ -1,4 +1,8 @@
-﻿using System.Text.Json;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+using CsharpDapperExample.Models;
 using Microsoft.AspNetCore.Http;
 
 namespace CsharpDapperExample.Utility
@@ -14,6 +18,17 @@ namespace CsharpDapperExample.Utility
         {
             var value = session.GetString(key);
             return value==null ? default : JsonSerializer.Deserialize<T>(value);
+        }
+        
+        public static List<T> GetItemsListFromSession<T>(IHttpContextAccessor httpContextAccessor, string key)
+        {
+            var itemsList = httpContextAccessor.HttpContext?.Session.Get<List<T>>(key);
+            if (itemsList != null && itemsList.Any())
+            {
+                return itemsList;
+            }
+
+            return new List<T>();
         }
     }
 }

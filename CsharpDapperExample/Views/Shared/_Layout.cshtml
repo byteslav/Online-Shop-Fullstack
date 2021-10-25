@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http
-@using CsharpDapperExample.Utility
-@inject IHttpContextAccessor HttpContextAccessor;
+@using SessionExtensions = CsharpDapperExample.Utility.SessionExtensions
+@inject IHttpContextAccessor _httpContextAccessor;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +15,7 @@
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CsharpDapperExample</a>
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Home Page</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,21 +29,13 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
                     </li>
                     <li class="nav-item">
-                        @if (HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart) != null)
-                        {
-                            <a asp-action="Index" asp-controller="Cart" class="nav-link text-dark">
+                        <a asp-action="Index" asp-controller="Cart" class="nav-link text-dark">
                                 @{
-                                    var count = HttpContextAccessor.HttpContext.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart).Count;
+                                    var count = SessionExtensions
+                                        .GetItemsListFromSession<ShoppingCart>(_httpContextAccessor, WebConstants.SessionCart).Count;
                                 }
                                 <p>Cart (@count)</p>
                             </a>
-                        }
-                        else
-                        {
-                            <a href="#" class="nav-link text-dark">
-                                <p>Cart (0)</p>
-                            </a>
-                        }
                     </li>
                 </ul>
             </div>

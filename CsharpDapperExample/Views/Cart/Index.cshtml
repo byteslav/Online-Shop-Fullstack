@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CsharpDapperExample.Models.Product>
+
+<h2>Shopping Cart</h2>
+@{
+    if (Model.Any())
+    {
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th></th>
+            </tr>
+ 
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>@product.Description</td>
+                    <td>@product.Category.Name</td>
+                    <td> <a asp-action="Remove" asp-route-id="@product.Id">Remove</a></td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>Please, add items to cart.</p>
+    }
+}

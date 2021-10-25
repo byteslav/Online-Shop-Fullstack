@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CsharpDapperExample.Models;
-using CsharpDapperExample.Services;
 using CsharpDapperExample.Services.Interfaces;
 
 namespace CsharpDapperExample.Controllers

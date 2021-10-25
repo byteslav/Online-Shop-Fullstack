@@ -3,7 +3,8 @@
 <h2>@Model.Product.Name - $@Model.Product.Price</h2>
 
 <br>
-@Model.Product.Description
+Description: @Model.Product.Description
+Category: @Model.Product.Category.Name
 <br>
 @if (!Model.IsExistInCart)
 {
