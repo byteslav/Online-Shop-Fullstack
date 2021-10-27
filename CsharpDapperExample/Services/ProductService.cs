@@ -51,15 +51,20 @@ namespace CsharpDapperExample.Services
 
         public async Task<ProductViewModel> GetProductViewModelByIdAsync(int id)
         {
-            var product = await _productRepository.GetByIdAsync(id);
             var productViewModel = new ProductViewModel
             {
-                Product = product,
+                Product = await GetProductByIdAsync(id),
                 CategorySelectList = await GetCategoriesListAsync()
             };
             return productViewModel;
         }
-        
+
+        public async Task<Product> GetProductByIdAsync(int id)
+        {
+            var product = await _productRepository.GetByIdAsync(id);
+            return product;
+        }
+
         public async Task UpdateProductAsync(Product product)
         {
             await _productRepository.UpdateAsync(product);

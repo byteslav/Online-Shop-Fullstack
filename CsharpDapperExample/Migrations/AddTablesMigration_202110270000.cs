@@ -3,8 +3,8 @@ using FluentMigrator;
 
 namespace CsharpDapperExample.Migrations
 {
-    [Migration(202110230003)]
-    public class Migration_202110230003 : Migration
+    [Migration(202110270000)]
+    public class AddTablesMigration_202110270000 : Migration
     {
         public override void Up()
         {

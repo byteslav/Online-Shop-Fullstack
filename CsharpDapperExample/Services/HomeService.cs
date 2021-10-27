@@ -71,16 +71,5 @@ namespace CsharpDapperExample.Services
             }
             _httpContextAccessor.HttpContext?.Session.Set(WebConstants.SessionCart, shoppingCartList);
         }
-
-        // private List<ShoppingCart> GetShoppingCartFromSession()
-        // {
-        //     var shoppingCart = _httpContextAccessor.HttpContext?.Session.Get<List<ShoppingCart>>(WebConstants.SessionCart);
-        //     if (shoppingCart != null && shoppingCart.Any())
-        //     {
-        //         return shoppingCart;
-        //     }
-        //
-        //     return new List<ShoppingCart>();
-        // }
     }
 }

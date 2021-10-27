@@ -19,5 +19,11 @@ namespace CsharpDapperExample.Models
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         public Category Category { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            var product = (Product)obj;
+            return product == this;
+        }
     }
 }

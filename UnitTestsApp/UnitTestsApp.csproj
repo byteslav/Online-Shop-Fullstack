@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\csharp-dapper-example\CsharpDapperExample.csproj" />
+      <ProjectReference Include="..\CsharpDapperExample\CsharpDapperExample.csproj" />
       <ProjectReference Include="..\CsharpDapperExample\CsharpDapperExample.csproj" />
     </ItemGroup>
 

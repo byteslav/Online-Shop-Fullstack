@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CsharpDapperExample.Models;
 
 namespace CsharpDapperExample.Repository
 {

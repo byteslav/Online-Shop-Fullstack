@@ -1,11 +1,10 @@
 ﻿@model CsharpDapperExample.ViewModels.DetailsViewModel
 
-<h2>@Model.Product.Name - $@Model.Product.Price</h2>
+<h2>@Model.Product.Name: $@Model.Product.Price</h2>
+<br>
 
-<br>
-Description: @Model.Product.Description
-Category: @Model.Product.Category.Name
-<br>
+<p>Description: @Model.Product.Description</p>
+<p>Category: @Model.Product.Category.Name</p>
 @if (!Model.IsExistInCart)
 {
     <td> <a asp-action="AddToCart" asp-route-id="@Model.Product.Id">Add To Cart</a></td>
