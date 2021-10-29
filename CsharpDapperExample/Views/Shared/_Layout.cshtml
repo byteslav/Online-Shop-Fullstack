@@ -1,8 +1,4 @@
-﻿@using Microsoft.AspNetCore.Http
-@using SessionExtensions = CsharpDapperExample.Utility.SessionExtensions
-@inject IHttpContextAccessor _httpContextAccessor;
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -29,13 +25,7 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a asp-action="Index" asp-controller="Cart" class="nav-link text-dark">
-                                @{
-                                    var count = SessionExtensions
-                                        .GetItemsListFromSession<ShoppingCart>(_httpContextAccessor, WebConstants.SessionCart).Count;
-                                }
-                                <p>Cart (@count)</p>
-                            </a>
+                        <a asp-action="Index" asp-controller="Cart" class="nav-link text-dark"> Cart </a>
                     </li>
                 </ul>
             </div>

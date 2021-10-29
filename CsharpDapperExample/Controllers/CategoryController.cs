@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using CsharpDapperExample.Models;
 using CsharpDapperExample.Services.Interfaces;
+using CsharpDapperExample.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CsharpDapperExample.Controllers
@@ -33,13 +34,21 @@ namespace CsharpDapperExample.Controllers
                 await _categoryService.CreateCategoryAsync(category);
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+
+            var categoryViewModel = new CategoryViewModel
+            {
+                Category = category
+            };
+            return View(categoryViewModel);
         }
 
         public async Task<IActionResult> Update(int id)
         {
-            var category = await _categoryService.GetCategoryByIdAsync(id);
-            return View(category);
+            var categoryViewModel = new CategoryViewModel
+            {
+                Category = await _categoryService.GetCategoryByIdAsync(id)
+            };
+            return View(categoryViewModel);
         }
 
         [HttpPost]
@@ -50,7 +59,11 @@ namespace CsharpDapperExample.Controllers
                 await _categoryService.UpdateCategoryAsync(category);
                 return RedirectToAction(nameof(Index));
             }
-            return View(category);
+            var categoryViewModel = new CategoryViewModel
+            {
+                Category = category
+            };
+            return View(categoryViewModel);
         }
         
         public async Task<IActionResult> Delete(int id)

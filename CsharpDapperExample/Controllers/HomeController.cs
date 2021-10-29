@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CsharpDapperExample.Models;
 using CsharpDapperExample.Services.Interfaces;
+using CsharpDapperExample.ViewModels;
 
 namespace CsharpDapperExample.Controllers
 {
@@ -17,26 +18,22 @@ namespace CsharpDapperExample.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var homeViewModel = await _homeService.GetHomeViewModelAsync();
+            var homeViewModel = new HomeViewModel
+            {
+                Products = await _homeService.GetAllProductsAsync(),
+                Categories = await _homeService.GetAllCategoriesAsync()
+            };
             return View(homeViewModel);
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            var details = await _homeService.GetDetailsViewModelAsync(id);
+            var details = new DetailsViewModel
+            {
+                Product = await _homeService.GetProductByIdAsync(id),
+                IsExistInCart = _homeService.IsExistInCart(id)
+            };
             return View(details);
-        }
-
-        public IActionResult AddToCart(int id)
-        {
-            _homeService.AddToCart(id);
-            return RedirectToAction(nameof(Index));
-        }
-        
-        public IActionResult RemoveFromCart(int id)
-        {
-            _homeService.RemoveFromCart(id);
-            return RedirectToAction(nameof(Index));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

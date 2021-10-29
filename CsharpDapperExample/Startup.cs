@@ -60,7 +60,6 @@ namespace CsharpDapperExample
 
             app.UseRouting();
 
-            app.UseAuthorization();
             app.UseSession();
             app.UseEndpoints(endpoints =>
             {

@@ -18,9 +18,9 @@ namespace CsharpDapperExample.Utility
             return value==null ? default : JsonSerializer.Deserialize<T>(value);
         }
         
-        public static List<T> GetItemsListFromSession<T>(IHttpContextAccessor httpContextAccessor, string key)
+        public static List<T> GetItemsListFromSession<T>(this ISession session, string key)
         {
-            var itemsList = httpContextAccessor.HttpContext?.Session.Get<List<T>>(key);
+            var itemsList = session.Get<List<T>>(key);
             if (itemsList != null && itemsList.Any())
             {
                 return itemsList;

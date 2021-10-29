@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CsharpDapperExample.Models;
 using CsharpDapperExample.Repository;
 using CsharpDapperExample.Services.Interfaces;
-using CsharpDapperExample.ViewModels;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CsharpDapperExample.Services
 {
@@ -25,38 +22,15 @@ namespace CsharpDapperExample.Services
             return products;
         }
 
-        public async Task<ProductViewModel> GetCategoriesAsync()
+        public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
-            var productViewModel = new ProductViewModel
-            {
-                CategorySelectList = await GetCategoriesListAsync()
-            };
-            return productViewModel;
-        }
-        
-        public async Task<ProductViewModel> CreateProductViewModelAsync(Product product)
-        {
-            var productViewModel = new ProductViewModel
-            {
-                Product = product,
-                CategorySelectList = await GetCategoriesListAsync()
-            };
-            return productViewModel;
+            var categories = await _categoryRepository.GetAllAsync();
+            return categories;
         }
 
         public async Task CreateProductAsync(Product product)
         {
             await _productRepository.AddAsync(product);
-        }
-
-        public async Task<ProductViewModel> GetProductViewModelByIdAsync(int id)
-        {
-            var productViewModel = new ProductViewModel
-            {
-                Product = await GetProductByIdAsync(id),
-                CategorySelectList = await GetCategoriesListAsync()
-            };
-            return productViewModel;
         }
 
         public async Task<Product> GetProductByIdAsync(int id)
@@ -73,17 +47,6 @@ namespace CsharpDapperExample.Services
         public async Task DeleteProductAsync(int id)
         {
             await _productRepository.DeleteAsync(id);
-        }
-
-        private async Task<IEnumerable<SelectListItem>> GetCategoriesListAsync()
-        {
-            var categories = await _categoryRepository.GetAllAsync();
-            var categoryDropDown = categories.Select(c => new SelectListItem
-            {
-                Text = c.Name,
-                Value = c.Id.ToString()
-            });
-            return categoryDropDown;
         }
 
     }

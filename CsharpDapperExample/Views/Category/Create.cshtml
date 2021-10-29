@@ -1,4 +1,4 @@
-﻿@model CsharpDapperExample.Models.Category
+﻿@model CsharpDapperExample.ViewModels.CategoryViewModel
 
 @{
     ViewData["Title"] = "New Category";
@@ -8,8 +8,8 @@
 <form asp-controller="Category" asp-action="Create">
     <div>
         <div class="form-group">
-            <label asp-for="Name"></label>
-            <input type="text" asp-for="Name" class="form-control form-control-sm"/>
+            <label asp-for="Category.Name"></label>
+            <input type="text" asp-for="Category.Name" class="form-control form-control-sm"/>
         </div>
         <div class="form-group">
             <input type="submit" value="Save" class="btn btn-outline-secondary" />

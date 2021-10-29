@@ -25,10 +25,6 @@
                     <td>@product.Price</td>
                     <td>@product.Category.Name</td>
                     <td> <a asp-action="Details" asp-route-id="@product.Id">Details</a></td>
-                        @* // else *@
-                        @* // { *@
-                        @* //     <td> <a asp-action="RemoveFromCart" asp-route-id="@product.Id">Remove From Cart</a></td> *@
-                        @* // } *@
                 </tr>
             }
     </table>

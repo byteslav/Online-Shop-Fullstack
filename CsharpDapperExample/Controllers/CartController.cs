@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CsharpDapperExample.Services.Interfaces;
+using CsharpDapperExample.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CsharpDapperExample.Controllers
@@ -14,13 +15,22 @@ namespace CsharpDapperExample.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var productsInCart = await _cartService.GetAllProductsInCartAsync();
+            var productsInCart = new CartViewModel
+            {
+                Products = await _cartService.GetAllProductsInCartAsync()
+            };
             return View(productsInCart);
         }
         
-        public IActionResult Remove(int id)
+        public IActionResult AddToCart(int id)
         {
-            _cartService.RemoveProductFromCart(id);
+            _cartService.AddToCart(id);
+            return RedirectToAction(nameof(Index));
+        }
+        
+        public IActionResult RemoveFromCart(int id)
+        {
+            _cartService.RemoveFromCart(id);
             return RedirectToAction(nameof(Index));
         }
     }

@@ -7,6 +7,7 @@ namespace CsharpDapperExample.Services.Interfaces
     public interface ICartService
     {
         Task<IEnumerable<Product>> GetAllProductsInCartAsync();
-        void RemoveProductFromCart(int id);
+        void AddToCart(int id);
+        void RemoveFromCart(int id);
     }
 }

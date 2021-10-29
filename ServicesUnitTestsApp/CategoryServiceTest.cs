@@ -54,9 +54,9 @@ namespace TestProject1
         [Fact]
         public async Task Update_Category()
         {
+            // Arrange
             var category = new Category { Id = 3, Name = "Sport" };
             var updatedCategory = new Category { Id = 3, Name = "Health" };
-            
             _categoryRepoMock.Setup(repo=>repo.GetByIdAsync(updatedCategory.Id)).ReturnsAsync(updatedCategory);
             var service = new CategoryService(_categoryRepoMock.Object);
             
@@ -68,7 +68,7 @@ namespace TestProject1
             var result = Assert.IsAssignableFrom<Category>(gottenCategory);
             Assert.Equal(result.Name, updatedCategory.Name);
         }
-        
+
         private IEnumerable<Category> GetCategories()
         {
             var categories = new List<Category>

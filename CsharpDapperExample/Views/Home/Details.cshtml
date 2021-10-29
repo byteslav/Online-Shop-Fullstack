@@ -7,9 +7,9 @@
 <p>Category: @Model.Product.Category.Name</p>
 @if (!Model.IsExistInCart)
 {
-    <td> <a asp-action="AddToCart" asp-route-id="@Model.Product.Id">Add To Cart</a></td>
+    <td> <a asp-controller="Cart" asp-action="AddToCart" asp-route-id="@Model.Product.Id">Add To Cart</a></td>
 }
 else
 {
-    <td> <a asp-action="RemoveFromCart" asp-route-id="@Model.Product.Id">Remove From Cart</a></td>
+    <td> <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@Model.Product.Id">Remove From Cart</a></td>
 }

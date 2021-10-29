@@ -6,7 +6,6 @@ using CsharpDapperExample.Repository;
 using CsharpDapperExample.Services.Interfaces;
 using CsharpDapperExample.Utility;
 using Microsoft.AspNetCore.Http;
-using SessionExtensions = CsharpDapperExample.Utility.SessionExtensions;
 
 namespace CsharpDapperExample.Services
 {
@@ -22,21 +21,34 @@ namespace CsharpDapperExample.Services
 
         public async Task<IEnumerable<Product>> GetAllProductsInCartAsync()
         {
-            var productsInCart = SessionExtensions
-                .GetItemsListFromSession<ShoppingCart>(_httpContextAccessor, WebConstants.SessionCart)
+            var productsInCart = _httpContextAccessor.HttpContext?.Session
+                .GetItemsListFromSession<ShoppingCart>(WebConstants.SessionCart)
                 .Select(i => i.ProductId).ToList();
             var allProducts = await _productRepository.GetAllAsync();
             
-            var productsList = allProducts.Where(p => productsInCart.Contains(p.Id));
-            return productsList;
+            var products = allProducts.Where(p => productsInCart.Contains(p.Id));
+            return products;
+        }
+        
+        public void AddToCart(int id)
+        {
+            var shoppingCartList = _httpContextAccessor.HttpContext?.Session
+                .GetItemsListFromSession<ShoppingCart>(WebConstants.SessionCart);
+            shoppingCartList?.Add(new ShoppingCart{ProductId = id});
+            
+            _httpContextAccessor.HttpContext?.Session.Set(WebConstants.SessionCart, shoppingCartList);
         }
 
-        public void RemoveProductFromCart(int id)
+        public void RemoveFromCart(int id)
         {
-            var productsInCart = SessionExtensions
-                .GetItemsListFromSession<ShoppingCart>(_httpContextAccessor, WebConstants.SessionCart);
-            productsInCart.Remove(productsInCart.FirstOrDefault(c => c.ProductId == id));
-            _httpContextAccessor.HttpContext?.Session.Set(WebConstants.SessionCart, productsInCart);
+            var shoppingCartList = _httpContextAccessor.HttpContext?.Session
+                .GetItemsListFromSession<ShoppingCart>(WebConstants.SessionCart);
+            var itemToRemove = shoppingCartList?.SingleOrDefault(c => c.ProductId == id);
+            if (itemToRemove != null)
+            {
+                shoppingCartList.Remove(itemToRemove);
+            }
+            _httpContextAccessor.HttpContext?.Session.Set(WebConstants.SessionCart, shoppingCartList);
         }
     }
 }

@@ -4,11 +4,7 @@ namespace CsharpDapperExample.ViewModels
 {
     public class DetailsViewModel
     {
-        public DetailsViewModel()
-        {
-            Product = new Product();
-        }
         public Product Product { get; set; }
-        public bool IsExistInCart { get; set; } = false;
+        public bool IsExistInCart { get; set; }
     }
 }
