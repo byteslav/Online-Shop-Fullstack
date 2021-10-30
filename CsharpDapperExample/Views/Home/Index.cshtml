@@ -1,10 +1,10 @@
 ﻿@model CsharpDapperExample.ViewModels.HomeViewModel
 
 <div class="text-center">
-    <button class="btn btn-outline-dark" data-filter="all">All</button>
+    Categories: 
     @foreach (var c in Model.Categories)
     {
-        <button class="btn btn-outline-secondary" data-filter="@c.Name">@c.Name</button>
+        @c.Name <text>; </text>
     }
 </div>
 <br/>

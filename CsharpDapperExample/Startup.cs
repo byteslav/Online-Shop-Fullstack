@@ -1,8 +1,4 @@
-using System.Reflection;
-using CsharpDapperExample.Models;
-using CsharpDapperExample.Repository;
-using CsharpDapperExample.Services;
-using CsharpDapperExample.Services.Interfaces;
+using CsharpDapperExample.Utility;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,12 +18,10 @@ namespace CsharpDapperExample
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IRepository<Product>, SqlProductRepository>();
-            services.AddScoped<IRepository<Category>, SqlCategoryRepository>();
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IHomeService, HomeService>();
-            services.AddScoped<ICartService, CartService>();
+            services.AddRepositories();
+            services.AddServices();
+            services.AddMigrations(Configuration);
+            
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddSession(options =>
@@ -35,13 +29,6 @@ namespace CsharpDapperExample
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-
-            services.AddFluentMigratorCore()
-                .ConfigureRunner(configure =>
-                    configure.AddPostgres()
-                        .WithGlobalConnectionString(Configuration.GetValue<string>("DBInfo:ConnectionString"))
-                        .ScanIn(Assembly.GetExecutingAssembly()).For.All())
-                .AddLogging(configure => configure.AddFluentMigratorConsole());
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
