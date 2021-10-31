@@ -7,7 +7,7 @@ using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CsharpDapperExample.Utility
+namespace CsharpDapperExample.Extensions
 {
     public static class ServiceExtensions
     {

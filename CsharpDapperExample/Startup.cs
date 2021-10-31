@@ -1,4 +1,4 @@
-using CsharpDapperExample.Utility;
+using CsharpDapperExample.Extensions;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

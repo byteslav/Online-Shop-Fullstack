@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using CsharpDapperExample.Extensions;
 using CsharpDapperExample.Models;
 using CsharpDapperExample.Repository;
 using CsharpDapperExample.Services.Interfaces;
-using CsharpDapperExample.Utility;
 using Microsoft.AspNetCore.Http;
 
 namespace CsharpDapperExample.Services

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CsharpDapperExample.Models;
 using CsharpDapperExample.Services.Interfaces;
@@ -25,15 +26,8 @@ namespace CsharpDapperExample.Controllers
         public async Task<ActionResult> Create()
         {
             var categories = await _productService.GetCategoriesAsync();
-            var productViewModel = new ProductViewModel
-            {
-                Product = new Product(),
-                CategorySelectList = categories.Select(c => new SelectListItem
-                {
-                    Text = c.Name,
-                    Value = c.Id.ToString()
-                })
-            };
+            var productViewModel = GetProductViewModel(new Product(), categories);
+            
             return View(productViewModel);
         }
  
@@ -45,32 +39,18 @@ namespace CsharpDapperExample.Controllers
                 await _productService.CreateProductAsync(product);
                 return RedirectToAction(nameof(Index));
             }
-
             var categories = await _productService.GetCategoriesAsync();
-            var productViewModel = new ProductViewModel
-            {
-                Product = product,
-                CategorySelectList = categories.Select(c => new SelectListItem
-                {
-                    Text = c.Name,
-                    Value = c.Id.ToString()
-                })
-            };
+            var productViewModel = GetProductViewModel(product, categories);
+            
             return View(productViewModel);
         }
 
         public async Task<IActionResult> Update(int id)
         {
+            var product = await _productService.GetProductByIdAsync(id);
             var categories = await _productService.GetCategoriesAsync();
-            var productViewModel = new ProductViewModel
-            {
-                Product = await _productService.GetProductByIdAsync(id),
-                CategorySelectList = categories.Select(c => new SelectListItem
-                {
-                    Text = c.Name,
-                    Value = c.Id.ToString()
-                })
-            };
+            var productViewModel = GetProductViewModel(product, categories);
+            
             return View(productViewModel);
         }
 
@@ -82,8 +62,20 @@ namespace CsharpDapperExample.Controllers
                 await _productService.UpdateProductAsync(product);
                 return RedirectToAction(nameof(Index));
             }
+            var categories = await _productService.GetCategoriesAsync();
+            var productViewModel = GetProductViewModel(product, categories);
+            
+            return View(productViewModel);
+        }
+        
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _productService.DeleteProductAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
 
-            var categories = await _productService.GetCategoriesAsync(); 
+        private ProductViewModel GetProductViewModel(Product product, IEnumerable<Category> categories)
+        {
             var productViewModel = new ProductViewModel
             {
                 Product = product,
@@ -93,13 +85,8 @@ namespace CsharpDapperExample.Controllers
                     Value = c.Id.ToString()
                 })
             };
-            return View(productViewModel);
-        }
-        
-        public async Task<IActionResult> Delete(int id)
-        {
-            await _productService.DeleteProductAsync(id);
-            return RedirectToAction(nameof(Index));
+
+            return productViewModel;
         }
     }
 }
