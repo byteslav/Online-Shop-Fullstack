@@ -1,4 +1,4 @@
-﻿namespace CsharpDapperExample
+﻿namespace CsharpDapperExample.Utility
 {
     public static class WebConstants
     {

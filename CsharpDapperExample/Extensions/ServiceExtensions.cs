@@ -3,6 +3,7 @@ using CsharpDapperExample.Models;
 using CsharpDapperExample.Repository;
 using CsharpDapperExample.Services;
 using CsharpDapperExample.Services.Interfaces;
+using CsharpDapperExample.Utility;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,8 +12,9 @@ namespace CsharpDapperExample.Extensions
 {
     public static class ServiceExtensions
     {
-        public static void AddRepositories(this IServiceCollection services)
+        public static void AddRepositories(this IServiceCollection services, IConfiguration configuration)
         {
+            services.Configure<DataBaseInfo>(options => configuration.GetSection("DataBaseInfo").Bind(options));
             services.AddScoped<IRepository<Product>, SqlProductRepository>();
             services.AddScoped<IRepository<Category>, SqlCategoryRepository>();
         }

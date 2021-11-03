@@ -18,9 +18,9 @@ namespace CsharpDapperExample
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRepositories();
-            services.AddServices();
+            services.AddRepositories(Configuration);
             services.AddMigrations(Configuration);
+            services.AddServices();
             
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();

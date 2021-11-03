@@ -3,8 +3,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using CsharpDapperExample.Models;
+using CsharpDapperExample.Utility;
 using Dapper;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Npgsql;
 
 namespace CsharpDapperExample.Repository
@@ -12,9 +13,9 @@ namespace CsharpDapperExample.Repository
     public class SqlProductRepository : IRepository<Product>
     {
         private readonly string _connectionString;
-        public SqlProductRepository(IConfiguration configuration)
+        public SqlProductRepository(IOptions<DataBaseInfo> options)
         {
-            _connectionString = configuration.GetValue<string>("DBInfo:ConnectionString");
+            _connectionString = options.Value.ConnectionString;
         }
         private IDbConnection Connection => new NpgsqlConnection(_connectionString);
         public async Task AddAsync(Product product)
