@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CsharpDapperExample.Infrastructure\CsharpDapperExample.Infrastructure.csproj" />
+      <ProjectReference Include="..\CsharpDapperExample.Entities\CsharpDapperExample.Entities.csproj" />
+    </ItemGroup>
+
+</Project>

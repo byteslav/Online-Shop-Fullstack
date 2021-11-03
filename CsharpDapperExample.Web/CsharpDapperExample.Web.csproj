@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>CsharpDapperExample</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Dapper" Version="2.0.90" />
+      <PackageReference Include="FluentMigrator" Version="3.3.1" />
+      <PackageReference Include="FluentMigrator.Runner" Version="3.3.1" />
+      <PackageReference Include="FluentMigrator.Runner.Postgres" Version="3.3.1" />
+      <PackageReference Include="Google.Protobuf" Version="3.19.1" />
+      <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+      <PackageReference Include="Grpc.Net.Client" Version="2.40.0" />
+      <PackageReference Include="Grpc.Tools" Version="2.41.1">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.10" />
+      <PackageReference Include="Npgsql" Version="5.0.10" />
+      <PackageReference Include="NUnit" Version="3.13.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="WebAppTests\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="WebAppTests\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="WebAppTests\obj\WebAppTests.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="WebAppTesting\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="WebAppTesting\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="WebAppTesting\obj\WebAppTesting.csproj.nuget.dgspec.json" />
+      <_ContentIncludedByDefault Remove="TestProject1\bin\Debug\net5.0\csharp-dapper-example.deps.json" />
+      <_ContentIncludedByDefault Remove="TestProject1\bin\Debug\net5.0\TestProject1.deps.json" />
+      <_ContentIncludedByDefault Remove="TestProject1\bin\Debug\net5.0\TestProject1.runtimeconfig.dev.json" />
+      <_ContentIncludedByDefault Remove="TestProject1\bin\Debug\net5.0\TestProject1.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="TestProject1\obj\project.assets.json" />
+      <_ContentIncludedByDefault Remove="TestProject1\obj\project.packagespec.json" />
+      <_ContentIncludedByDefault Remove="TestProject1\obj\TestProject1.csproj.nuget.dgspec.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\CsharpDapperExample.BLL\CsharpDapperExample.BLL.csproj" />
+      <ProjectReference Include="..\CsharpDapperExample.Entities\CsharpDapperExample.Entities.csproj" />
+    </ItemGroup>
+
+</Project>

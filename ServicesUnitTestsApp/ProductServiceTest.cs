@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CsharpDapperExample.Models;
-using CsharpDapperExample.Repository;
-using CsharpDapperExample.Services;
+using CsharpDapperExample.BLL.Services;
+using CsharpDapperExample.Data.Repository;
+using CsharpDapperExample.Entities;
 using Moq;
 using Xunit;
 

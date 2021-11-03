@@ -31,9 +31,9 @@ ____________________________________________
 
 ### :whale: *Docker Run Service*
 1. Clone repository with ```git clone https://github.com/azaza12345/CsharpDapperExample```
-2. Go to folder with compose file ```cd CsharpDapperExample/CsharpDapperExample```
+2. Go to folder with compose file ```cd CsharpDapperExample/CsharpDapperExample.Web```
 3. Run ```docker-compose up``` in console
-4. Try service on http://localhost/product
+4. Try service on http://localhost
 
 ____________________________________________
 ### :checkered_flag: *P.S.*

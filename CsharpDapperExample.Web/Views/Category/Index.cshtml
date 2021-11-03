@@ -1,0 +1,30 @@
+﻿@model IEnumerable<CsharpDapperExample.Entities.Category>
+
+<h2>@ViewData["Title"]</h2>
+<p>
+    <a asp-controller="Category" asp-action="Create">Add</a>
+</p>
+@{
+    if (Model.Any())
+    {
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+ 
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td> <a asp-action="Update" asp-route-id="@category.Id">Update</a></td>
+                    <td> <a asp-action="Delete" asp-route-id="@category.Id">Delete</a> </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <p>No categories yet</p>
+    }
+}
