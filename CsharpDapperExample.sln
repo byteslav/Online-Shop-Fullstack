@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpDapperExample.Infrast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpDapperExample.BLL", "CsharpDapperExample.BLL\CsharpDapperExample.BLL.csproj", "{D65CE22D-0BB5-4028-A53D-739627C6FAA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcClient", "GrpcClient\GrpcClient.csproj", "{B379FA61-BDBF-4340-93F2-F44008553635}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,5 +37,9 @@ Global
 		{D65CE22D-0BB5-4028-A53D-739627C6FAA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D65CE22D-0BB5-4028-A53D-739627C6FAA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D65CE22D-0BB5-4028-A53D-739627C6FAA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B379FA61-BDBF-4340-93F2-F44008553635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B379FA61-BDBF-4340-93F2-F44008553635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B379FA61-BDBF-4340-93F2-F44008553635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B379FA61-BDBF-4340-93F2-F44008553635}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

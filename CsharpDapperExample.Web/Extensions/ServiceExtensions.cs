@@ -4,6 +4,7 @@ using CsharpDapperExample.BLL.Services;
 using CsharpDapperExample.Data;
 using CsharpDapperExample.Data.Repository;
 using CsharpDapperExample.Entities;
+using CsharpDapperExample.Grpc;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +26,8 @@ namespace CsharpDapperExample.Extensions
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<ICartService, CartService>();
+
+            services.AddScoped<GrpcService>();
         }
         
         public static void AddMigrations(this IServiceCollection services, IConfiguration configuration)

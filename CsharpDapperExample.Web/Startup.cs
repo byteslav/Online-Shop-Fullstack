@@ -1,4 +1,5 @@
 using CsharpDapperExample.Extensions;
+using CsharpDapperExample.Grpc;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,9 @@ namespace CsharpDapperExample
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            services.AddAutoMapper(typeof(Startup));
+            services.AddGrpc();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -53,6 +57,7 @@ namespace CsharpDapperExample
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapGrpcService<GrpcService>();
             });
 
             using var scope = app.ApplicationServices.CreateScope();

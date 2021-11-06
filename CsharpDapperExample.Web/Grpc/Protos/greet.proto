@@ -1,0 +1,33 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "CsharpDapperExample";
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello(HelloRequest) returns (HelloReply);
+  rpc GetAllProducts (GetAllProductsRequest) returns (stream ProductModel);
+}
+
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
+
+message GetAllProductsRequest{
+  
+}
+
+message ProductModel{
+  int32 productId = 1;
+  string name = 2;
+  float price = 3;
+  string description = 4;
+  int32 categoryId = 5;
+}
+    

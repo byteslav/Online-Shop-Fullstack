@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
       <PackageReference Include="Dapper" Version="2.0.90" />
       <PackageReference Include="FluentMigrator" Version="3.3.1" />
       <PackageReference Include="FluentMigrator.Runner" Version="3.3.1" />
@@ -41,6 +42,12 @@
     <ItemGroup>
       <ProjectReference Include="..\CsharpDapperExample.BLL\CsharpDapperExample.BLL.csproj" />
       <ProjectReference Include="..\CsharpDapperExample.Entities\CsharpDapperExample.Entities.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Protobuf Include="Grpc\Protos\greet.proto">
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
     </ItemGroup>
 
 </Project>
