@@ -1,5 +1,6 @@
-﻿using System.Linq;
+﻿using System;
 using System.Threading.Tasks;
+using AutoMapper;
 using CsharpDapperExample.Data.Repository;
 using CsharpDapperExample.Entities;
 using Grpc.Core;
@@ -11,12 +12,14 @@ namespace CsharpDapperExample.Grpc
     public class GrpcService : GreeterBase
     {
         private readonly IRepository<Product> _productRepository;
+        private readonly IMapper _mapper;
         private readonly ILogger<GrpcService> _logger;
 
-        public GrpcService(ILogger<GrpcService> logger, IRepository<Product> productRepository)
+        public GrpcService(ILogger<GrpcService> logger, IRepository<Product> productRepository, IMapper mapper)
         {
-            _logger = logger;
             _productRepository = productRepository;
+            _mapper = mapper;
+            _logger = logger;
         }
         public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
         {
@@ -26,20 +29,23 @@ namespace CsharpDapperExample.Grpc
             });
         }
 
+        public override async Task<ProductModel> GetProduct(GetProductRequest request, ServerCallContext context)
+        {
+            var product = await _productRepository.GetByIdAsync(request.ProductId);
+            if (product == null)
+            {
+                throw new RpcException(new Status(StatusCode.NotFound, $"Product with ID={request.ProductId} is not found."));
+            }
+            var productModel = _mapper.Map<ProductModel>(product);
+            return productModel;
+        }
+
         public override async Task GetAllProducts(GetAllProductsRequest request, IServerStreamWriter<ProductModel> responseStream, ServerCallContext context)
         {
             var productList = await _productRepository.GetAllAsync();
-            for (int i = 1; i <= productList.Count(); i++)
+            foreach (var product in productList)
             {
-                var product = await _productRepository.GetByIdAsync(i);
-                var productModel = new ProductModel
-                {
-                    ProductId = product.Id,
-                    Name = product.Name,
-                    Description = product.Description,
-                    Price = product.Price,
-                    CategoryId = product.CategoryId
-                };
+                var productModel = _mapper.Map<ProductModel>(product);
                 await responseStream.WriteAsync(productModel);
             }
         }
