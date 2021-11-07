@@ -57,7 +57,7 @@ namespace CsharpDapperExample
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapGrpcService<GrpcService>();
+                endpoints.MapGrpcService<ProductGrpcService>();
             });
 
             using var scope = app.ApplicationServices.CreateScope();

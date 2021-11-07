@@ -5,6 +5,10 @@ namespace CsharpDapperExample.Mapper
 {
     public class ProductProfile : Profile
     {
-        
+        public ProductProfile()
+        {
+            CreateMap<Product, ProductModel>();
+            CreateMap<ProductModel, Product>();
+        }
     }
 }

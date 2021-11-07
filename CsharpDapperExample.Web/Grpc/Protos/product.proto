@@ -2,32 +2,48 @@
 
 option csharp_namespace = "CsharpDapperExample";
 
-// The greeting service definition.
-service Greeter {
-  // Sends a greeting
-  rpc SayHello(HelloRequest) returns (HelloReply);
-  rpc GetAllProducts (GetAllProductsRequest) returns (stream ProductModel);
+service Products {
+  rpc GetProduct (GetProductRequest) returns (ProductModel);
+  rpc GetAllProducts (GetAllProductsRequest) returns (AllProductsResponse);
+
+  rpc AddProduct (AddProductRequest) returns(ProductModel);
+  rpc UpdateProduct (UpdateProductRequest) returns (ProductModel);
+  rpc DeleteProduct (DeleteProductRequest) returns (DeleteProductResponse);
 }
 
-
-// The request message containing the user's name.
-message HelloRequest {
-  string name = 1;
-}
-// The response message containing the greetings.
-message HelloReply {
-  string message = 1;
+message GetProductRequest {
+  int32 ProductId = 1;
 }
 
-message GetAllProductsRequest{
-  
+message GetAllProductsRequest {
+
+}
+
+message AllProductsResponse {
+  repeated ProductModel ProductModel= 1;
+}
+
+message AddProductRequest {
+  ProductModel Product = 1;
+}
+
+message UpdateProductRequest {
+  ProductModel Product = 1;
+}
+
+message DeleteProductRequest {
+  int32 ProductId = 1;
+}
+
+message DeleteProductResponse {
+
 }
 
 message ProductModel{
-  int32 productId = 1;
+  int32 ProductId = 1;
   string name = 2;
-  float price = 3;
-  string description = 4;
+  float Price = 3;
+  string Description = 4;
   int32 categoryId = 5;
 }
     

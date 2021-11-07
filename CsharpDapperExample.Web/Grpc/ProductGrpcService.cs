@@ -1,32 +1,24 @@
-﻿using System;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CsharpDapperExample.Data.Repository;
 using CsharpDapperExample.Entities;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
-using static CsharpDapperExample.Greeter;
 
 namespace CsharpDapperExample.Grpc
 {
-    public class GrpcService : GreeterBase
+    public class ProductGrpcService : Products.ProductsBase
     {
         private readonly IRepository<Product> _productRepository;
         private readonly IMapper _mapper;
-        private readonly ILogger<GrpcService> _logger;
+        private readonly ILogger<ProductGrpcService> _logger;
 
-        public GrpcService(ILogger<GrpcService> logger, IRepository<Product> productRepository, IMapper mapper)
+        public ProductGrpcService(ILogger<ProductGrpcService> logger, IRepository<Product> productRepository, IMapper mapper)
         {
             _productRepository = productRepository;
             _mapper = mapper;
             _logger = logger;
-        }
-        public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
-        {
-            return Task.FromResult(new HelloReply
-            {
-                Message = "Hello " + request.Name
-            });
         }
 
         public override async Task<ProductModel> GetProduct(GetProductRequest request, ServerCallContext context)
@@ -40,14 +32,36 @@ namespace CsharpDapperExample.Grpc
             return productModel;
         }
 
-        public override async Task GetAllProducts(GetAllProductsRequest request, IServerStreamWriter<ProductModel> responseStream, ServerCallContext context)
+        public override async Task<AllProductsResponse> GetAllProducts(GetAllProductsRequest request, ServerCallContext context)
         {
-            var productList = await _productRepository.GetAllAsync();
-            foreach (var product in productList)
-            {
-                var productModel = _mapper.Map<ProductModel>(product);
-                await responseStream.WriteAsync(productModel);
-            }
+            var products = await _productRepository.GetAllAsync();
+            var productModels = products.Select(p => _mapper.Map<ProductModel>(p));
+            
+            var response = new AllProductsResponse();
+            response.ProductModel.AddRange(productModels);
+            return response;
+        }
+
+        public override async Task<ProductModel> AddProduct(AddProductRequest request, ServerCallContext context)
+        {
+            var product = _mapper.Map<Product>(request.Product);
+            await _productRepository.AddAsync(product);
+            
+            return request.Product;
+        }
+
+        public override async Task<ProductModel> UpdateProduct(UpdateProductRequest request, ServerCallContext context)
+        {
+            var product = _mapper.Map<Product>(request.Product);
+            await _productRepository.UpdateAsync(product);
+            
+            return request.Product;
+        }
+
+        public override async Task<DeleteProductResponse> DeleteProduct(DeleteProductRequest request, ServerCallContext context)
+        {
+            await _productRepository.DeleteAsync(request.ProductId);
+            return new DeleteProductResponse();
         }
     }
 }

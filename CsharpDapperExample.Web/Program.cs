@@ -1,6 +1,4 @@
-using CsharpDapperExample.Grpc;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace CsharpDapperExample
@@ -17,10 +15,6 @@ namespace CsharpDapperExample
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                })
-                .ConfigureServices(service =>
-                {
-                    service.AddHostedService<Client>();
                 });
     }
 }
