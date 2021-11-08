@@ -5,13 +5,27 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="10.1.1" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+        <PackageReference Include="Google.Protobuf" Version="3.19.1" />
+        <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+        <PackageReference Include="Grpc.Net.Client" Version="2.40.0" />
+        <PackageReference Include="Grpc.Tools" Version="2.41.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\CsharpDapperExample.Infrastructure\CsharpDapperExample.Infrastructure.csproj" />
       <ProjectReference Include="..\CsharpDapperExample.Entities\CsharpDapperExample.Entities.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Protobuf Include="Grpc\Protos\product.proto">
+        <Generator>MSBuild:Compile</Generator>
+      </Protobuf>
     </ItemGroup>
 
 </Project>

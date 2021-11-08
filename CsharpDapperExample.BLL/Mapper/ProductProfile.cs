@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CsharpDapperExample.Entities;
 
-namespace CsharpDapperExample.Mapper
+namespace CsharpDapperExample.BLL.Mapper
 {
     public class ProductProfile : Profile
     {

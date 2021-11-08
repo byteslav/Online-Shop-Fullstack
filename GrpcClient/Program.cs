@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
 using CsharpDapperExample;
-using Grpc.Core;
 using Grpc.Net.Client;
 
 namespace GrpcClient

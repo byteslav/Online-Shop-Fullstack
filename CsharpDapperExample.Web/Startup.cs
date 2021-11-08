@@ -1,5 +1,7 @@
+using CsharpDapperExample.BLL.Grpc;
+using CsharpDapperExample.BLL.Grpc.Services;
+using CsharpDapperExample.BLL.Mapper;
 using CsharpDapperExample.Extensions;
-using CsharpDapperExample.Grpc;
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,6 +21,8 @@ namespace CsharpDapperExample
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(ProductProfile));
+            
             services.AddMigrations(Configuration);
             services.AddRepositories(Configuration);
             services.AddServices();
@@ -31,7 +35,6 @@ namespace CsharpDapperExample
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddAutoMapper(typeof(Startup));
             services.AddGrpc();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

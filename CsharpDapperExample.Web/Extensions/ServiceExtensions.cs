@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
+using CsharpDapperExample.BLL.Grpc;
+using CsharpDapperExample.BLL.Grpc.Services;
 using CsharpDapperExample.BLL.Interfaces;
 using CsharpDapperExample.BLL.Services;
 using CsharpDapperExample.Data;
 using CsharpDapperExample.Data.Repository;
 using CsharpDapperExample.Entities;
-using CsharpDapperExample.Grpc;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

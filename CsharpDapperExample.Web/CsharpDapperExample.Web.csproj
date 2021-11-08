@@ -44,18 +44,4 @@
       <ProjectReference Include="..\CsharpDapperExample.Entities\CsharpDapperExample.Entities.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Protobuf Include="Grpc\Protos\product.proto">
-        <GrpcServices>Both</GrpcServices>
-        <Access>Public</Access>
-        <ProtoCompile>True</ProtoCompile>
-        <CompileOutputs>True</CompileOutputs>
-        <OutputDir>obj\Debug\net5.0\</OutputDir>
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Grpc\Protos\category.proto">
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-    </ItemGroup>
-
 </Project>
