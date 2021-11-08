@@ -6,7 +6,7 @@ using CsharpDapperExample.Entities;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
 
-namespace CsharpDapperExample.Grpc
+namespace CsharpDapperExample.BLL.Grpc.Services
 {
     public class ProductGrpcService : Products.ProductsBase
     {
@@ -24,10 +24,6 @@ namespace CsharpDapperExample.Grpc
         public override async Task<ProductModel> GetProduct(GetProductRequest request, ServerCallContext context)
         {
             var product = await _productRepository.GetByIdAsync(request.ProductId);
-            if (product == null)
-            {
-                throw new RpcException(new Status(StatusCode.NotFound, $"Product with ID={request.ProductId} is not found."));
-            }
             var productModel = _mapper.Map<ProductModel>(product);
             return productModel;
         }
@@ -38,7 +34,7 @@ namespace CsharpDapperExample.Grpc
             var productModels = products.Select(p => _mapper.Map<ProductModel>(p));
             
             var response = new AllProductsResponse();
-            response.ProductModel.AddRange(productModels);
+            response.Products.AddRange(productModels);
             return response;
         }
 

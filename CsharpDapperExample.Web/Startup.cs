@@ -1,4 +1,3 @@
-using CsharpDapperExample.BLL.Grpc;
 using CsharpDapperExample.BLL.Grpc.Services;
 using CsharpDapperExample.BLL.Mapper;
 using CsharpDapperExample.Extensions;
