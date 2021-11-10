@@ -14,7 +14,7 @@ namespace GrpcClient
 
             using var channel = GrpcChannel.ForAddress("https://localhost:5001");
             var client = new Products.ProductsClient(channel);
-
+            
             var products = client.GetAllProducts(new GetAllProductsRequest());
             Console.WriteLine(products);
         }

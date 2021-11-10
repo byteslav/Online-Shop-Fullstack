@@ -1,0 +1,46 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "CsharpDapperExample";
+
+service Categories {
+  rpc GetCategory (GetCategoryRequest) returns (CategoryModel);
+  rpc GetAllCategories (GetAllCategoriesRequest) returns (AllCategoriesResponse);
+
+  rpc AddCategory (AddCategoryRequest) returns(CategoryModel);
+  rpc UpdateCategory (UpdateCategoryRequest) returns (CategoryModel);
+  rpc DeleteCategory (DeleteCategoryRequest) returns (DeleteCategoryResponse);
+}
+
+message GetCategoryRequest {
+  int32 CategoryId = 1;
+}
+
+message GetAllCategoriesRequest {
+
+}
+
+message AllCategoriesResponse {
+  repeated CategoryModel Categories = 1;
+}
+
+message AddCategoryRequest {
+  CategoryModel Category = 1;
+}
+
+message UpdateCategoryRequest {
+  CategoryModel Category = 1;
+}
+
+message DeleteCategoryRequest {
+  int32 CategoryId = 1;
+}
+
+message DeleteCategoryResponse {
+
+}
+
+message CategoryModel{
+  int32 categoryId = 1;
+  string name = 2;
+}
+    

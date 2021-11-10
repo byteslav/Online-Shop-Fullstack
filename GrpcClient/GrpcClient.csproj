@@ -13,6 +13,9 @@
         <Protobuf Include="..\CsharpDapperExample.BLL\Grpc\Protos\product.proto" GrpcServices="Client">
             <Link>Protos\product.proto</Link>
         </Protobuf>
+        <Protobuf Include="..\CsharpDapperExample.BLL\Grpc\Protos\category.proto" GrpcServices="Client">
+            <Link>Protos\category.proto</Link>
+        </Protobuf>
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\CsharpDapperExample.Web\CsharpDapperExample.Web.csproj" />

@@ -1,3 +1,4 @@
+using AutoMapper;
 using CsharpDapperExample.BLL.Grpc.Services;
 using CsharpDapperExample.BLL.Mapper;
 using CsharpDapperExample.Extensions;
@@ -60,6 +61,7 @@ namespace CsharpDapperExample
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapGrpcService<ProductGrpcService>();
+                endpoints.MapGrpcService<CategoryGrpcService>();
             });
 
             using var scope = app.ApplicationServices.CreateScope();
