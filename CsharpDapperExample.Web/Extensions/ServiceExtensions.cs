@@ -27,7 +27,10 @@ namespace CsharpDapperExample.Extensions
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<ICartService, CartService>();
-
+        }
+        
+        public static void AddGrpcServices(this IServiceCollection services)
+        {
             services.AddScoped<ProductGrpcService>();
             services.AddScoped<CategoryGrpcService>();
         }

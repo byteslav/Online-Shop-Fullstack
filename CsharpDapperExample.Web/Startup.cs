@@ -26,6 +26,7 @@ namespace CsharpDapperExample
             services.AddMigrations(Configuration);
             services.AddRepositories(Configuration);
             services.AddServices();
+            services.AddGrpcServices();
             
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
