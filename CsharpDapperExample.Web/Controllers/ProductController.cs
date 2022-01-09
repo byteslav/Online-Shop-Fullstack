@@ -25,7 +25,35 @@ namespace CsharpDapperExample.Controllers
             var products = await _productService.GetAllProductsAsync();
             return new JsonResult(products);
         }
+ 
+        [HttpPost]
+        public async Task<ActionResult> Create(Product product)
+        {
+            if (!ModelState.IsValid)
+                return new JsonResult("Something went wrong!");
+            
+            await _productService.CreateProductAsync(product);
+            return new JsonResult("Successfully added!!");
+
+        }
         
+        [HttpPut]
+        public async Task<IActionResult> Update(Product product)
+        {
+            if (!ModelState.IsValid)
+                return new JsonResult("Something went wrong!");
+            
+            await _productService.UpdateProductAsync(product);
+            return new JsonResult("Successfully updated!");
+        }
+        
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _productService.DeleteProductAsync(id);
+            return new JsonResult($"Deleted by id: {id}");
+        }
+
         [HttpGet("create")]
         public async Task<ActionResult> Create()
         {
@@ -33,20 +61,6 @@ namespace CsharpDapperExample.Controllers
             var productViewModel = GetProductViewModel(new Product(), categories);
             
             return new JsonResult(productViewModel);
-        }
- 
-        [HttpPost]
-        public async Task<ActionResult> Create(Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                await _productService.CreateProductAsync(product);
-                return RedirectToAction(nameof(Index));
-            }
-            var categories = await _productService.GetCategoriesAsync();
-            var productViewModel = GetProductViewModel(product, categories);
-            
-            return new JsonResult("Success!!");
         }
 
         [HttpGet("update")]
@@ -57,28 +71,6 @@ namespace CsharpDapperExample.Controllers
             var productViewModel = GetProductViewModel(product, categories);
             
             return new JsonResult(productViewModel);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Update(Product product)
-        {
-            if (ModelState.IsValid)
-            {
-                await _productService.UpdateProductAsync(product);
-                return RedirectToAction(nameof(Index));
-            }
-            var categories = await _productService.GetCategoriesAsync();
-            var productViewModel = GetProductViewModel(product, categories);
-            
-            //return View(productViewModel);
-            return new JsonResult(productViewModel);
-        }
-        
-        [HttpDelete]
-        public async Task<IActionResult> Delete(int id)
-        {
-            await _productService.DeleteProductAsync(id);
-            return RedirectToAction(nameof(Index));
         }
 
         private ProductViewModel GetProductViewModel(Product product, IEnumerable<Category> categories)
