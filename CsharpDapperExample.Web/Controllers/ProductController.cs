@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CsharpDapperExample.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -17,18 +19,20 @@ namespace CsharpDapperExample.Controllers
             _productService = productService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var products = await _productService.GetAllProductsAsync();
-            return View(products);
+            return new JsonResult(products);
         }
         
+        [HttpGet("create")]
         public async Task<ActionResult> Create()
         {
             var categories = await _productService.GetCategoriesAsync();
             var productViewModel = GetProductViewModel(new Product(), categories);
             
-            return View(productViewModel);
+            return new JsonResult(productViewModel);
         }
  
         [HttpPost]
@@ -42,19 +46,20 @@ namespace CsharpDapperExample.Controllers
             var categories = await _productService.GetCategoriesAsync();
             var productViewModel = GetProductViewModel(product, categories);
             
-            return View(productViewModel);
+            return new JsonResult("Success!!");
         }
 
+        [HttpGet("update")]
         public async Task<IActionResult> Update(int id)
         {
             var product = await _productService.GetProductByIdAsync(id);
             var categories = await _productService.GetCategoriesAsync();
             var productViewModel = GetProductViewModel(product, categories);
             
-            return View(productViewModel);
+            return new JsonResult(productViewModel);
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Update(Product product)
         {
             if (ModelState.IsValid)
@@ -65,9 +70,11 @@ namespace CsharpDapperExample.Controllers
             var categories = await _productService.GetCategoriesAsync();
             var productViewModel = GetProductViewModel(product, categories);
             
-            return View(productViewModel);
+            //return View(productViewModel);
+            return new JsonResult(productViewModel);
         }
         
+        [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
             await _productService.DeleteProductAsync(id);
