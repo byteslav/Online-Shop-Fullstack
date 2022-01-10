@@ -1,0 +1,30 @@
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Description</th>
+      <th>CategoryId</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let product of productList">
+      <td> {{product.name}}</td>
+      <td> {{product.price}}</td>
+      <td> {{product.description}}</td>
+      <td> {{product.categoryId}}</td>
+      <td>
+        <button type="button" class="btn btn-light mr-1">
+          Edit
+        </button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-light mr-1">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

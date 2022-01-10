@@ -37,6 +37,7 @@ namespace CsharpDapperExample
             });
 
             services.AddGrpc();
+            services.AddCors();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -54,6 +55,8 @@ namespace CsharpDapperExample
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseSession();
             app.UseEndpoints(endpoints =>
