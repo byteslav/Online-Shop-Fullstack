@@ -10,12 +10,16 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ProductComponent } from './product/product.component';
 import { CategoryService } from "./category.service";
 import { CategoryComponent } from './category/category.component';
+import { ShowCategoryComponent } from './category/show-category/show-category.component';
+import { AddEditCategoryComponent } from './category/add-edit-category/add-edit-category.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductComponent,
-    CategoryComponent
+    CategoryComponent,
+    ShowCategoryComponent,
+    AddEditCategoryComponent
   ],
   imports: [
     BrowserModule,
