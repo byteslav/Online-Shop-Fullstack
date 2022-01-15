@@ -16,11 +16,12 @@ export class CategoryService {
   }
 
   addCategory(value: any) {
+    console.log('added');
     return this.http.post(this.APIUrl+'/Category', value);
   }
 
   updateCategory(value: any) {
-    return this.http.put(this.APIUrl+'/Category', value);
+    return this.http.put(this.APIUrl+'/Category/update', value);
   }
 
   deleteCategory(value: any) {

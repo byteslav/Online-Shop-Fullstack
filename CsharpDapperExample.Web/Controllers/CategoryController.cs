@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CsharpDapperExample.BLL.Interfaces;
 using CsharpDapperExample.Entities;
-using CsharpDapperExample.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CsharpDapperExample.Controllers
@@ -49,19 +48,5 @@ namespace CsharpDapperExample.Controllers
             await _categoryService.DeleteCategoryAsync(id);
             return new JsonResult($"Deleted by id: {id}");
         }
-        
-        public ActionResult Create()
-        {
-            return View();
-        }
-        public async Task<IActionResult> Update(int id)
-        {
-            var categoryViewModel = new CategoryViewModel
-            {
-                Category = await _categoryService.GetCategoryByIdAsync(id)
-            };
-            return View(categoryViewModel);
-        }
-
     }
 }

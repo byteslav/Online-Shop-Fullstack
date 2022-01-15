@@ -1,4 +1,3 @@
-using AutoMapper;
 using CsharpDapperExample.BLL.Grpc.Services;
 using CsharpDapperExample.BLL.Mapper;
 using CsharpDapperExample.Extensions;
@@ -56,7 +55,7 @@ namespace CsharpDapperExample
 
             app.UseRouting();
 
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().WithMethods("POST"));
 
             app.UseSession();
             app.UseEndpoints(endpoints =>

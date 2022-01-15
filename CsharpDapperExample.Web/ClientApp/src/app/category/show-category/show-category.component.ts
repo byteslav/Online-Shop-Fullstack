@@ -26,7 +26,6 @@ export class ShowCategoryComponent implements OnInit {
   }
 
   addClick() {
-    console.log('hi')
     this.category = {
       id: 0,
       name: ''
@@ -35,6 +34,11 @@ export class ShowCategoryComponent implements OnInit {
     this.ActivateAddEditCategory = true;
   }
 
+  editClick(item: any) {
+    this.category = item;
+    this.ModalTitle = 'Edit category';
+    this.ActivateAddEditCategory = true;
+  }
 
   closeClick() {
     this.ActivateAddEditCategory = false;

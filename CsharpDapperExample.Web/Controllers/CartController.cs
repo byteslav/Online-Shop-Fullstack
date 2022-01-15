@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CsharpDapperExample.BLL.Interfaces;
 using CsharpDapperExample.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CsharpDapperExample.Controllers
@@ -20,7 +19,7 @@ namespace CsharpDapperExample.Controllers
             {
                 Products = await _cartService.GetAllProductsInCartAsync()
             };
-            return View(productsInCart);
+            return Ok();
         }
         
         public IActionResult AddToCart(int id)

@@ -23,7 +23,7 @@ namespace CsharpDapperExample.Controllers
                 Products = await _homeService.GetAllProductsAsync(),
                 Categories = await _homeService.GetAllCategoriesAsync()
             };
-            return View(homeViewModel);
+            return Ok();
         }
 
         public async Task<IActionResult> Details(int id)
@@ -33,13 +33,7 @@ namespace CsharpDapperExample.Controllers
                 Product = await _homeService.GetProductByIdAsync(id),
                 IsExistInCart = _homeService.IsExistInCart(id)
             };
-            return View(details);
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return Ok();
         }
     }
 }
