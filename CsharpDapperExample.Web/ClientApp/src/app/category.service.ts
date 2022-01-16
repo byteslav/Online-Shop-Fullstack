@@ -21,7 +21,7 @@ export class CategoryService {
   }
 
   updateCategory(value: any) {
-    return this.http.put(this.APIUrl+'/Category/update', value);
+    return this.http.put(this.APIUrl+'/Category', value);
   }
 
   deleteCategory(value: any) {

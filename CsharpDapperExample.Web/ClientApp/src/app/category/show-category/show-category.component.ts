@@ -44,4 +44,13 @@ export class ShowCategoryComponent implements OnInit {
     this.ActivateAddEditCategory = false;
     this.refreshCategoriesList();
   }
+
+  deleteClick(category: any) {
+    if(confirm('Are you sure you want delete this category?')) {
+      this.categoryService.deleteCategory(category.id).subscribe(data => {
+        alert(data.toString());
+        this.refreshCategoriesList();
+      });
+    }
+  }
 }

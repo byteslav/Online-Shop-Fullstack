@@ -20,8 +20,8 @@ export class AddEditCategoryComponent implements OnInit {
   }
 
   addCategory() {
-    let newCategory = {id:this.CategoryId,
-                  name:this.CategoryName};
+    let newCategory = { id:this.CategoryId,
+                  name:this.CategoryName };
     this.categoryService.addCategory(newCategory).subscribe(
       result => {
         alert(result.toString());
@@ -30,8 +30,8 @@ export class AddEditCategoryComponent implements OnInit {
   }
 
   updateCategory() {
-    let newCategory = {id:this.CategoryId,
-      name:this.CategoryName};
+    let newCategory = { id:this.CategoryId,
+      name:this.CategoryName };
     this.categoryService.updateCategory(newCategory).subscribe(
       result => {
         alert(result.toString());
