@@ -12,6 +12,8 @@ import { CategoryService } from "./category.service";
 import { CategoryComponent } from './category/category.component';
 import { ShowCategoryComponent } from './category/show-category/show-category.component';
 import { AddEditCategoryComponent } from './category/add-edit-category/add-edit-category.component';
+import { ShowProductComponent } from './product/show-product/show-product.component';
+import { AddEditProductComponent } from './product/add-edit-product/add-edit-product.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { AddEditCategoryComponent } from './category/add-edit-category/add-edit-
     ProductComponent,
     CategoryComponent,
     ShowCategoryComponent,
-    AddEditCategoryComponent
+    AddEditCategoryComponent,
+    ShowProductComponent,
+    AddEditProductComponent
   ],
   imports: [
     BrowserModule,

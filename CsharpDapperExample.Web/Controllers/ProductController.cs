@@ -54,25 +54,6 @@ namespace CsharpDapperExample.Controllers
             return new JsonResult($"Deleted by id: {id}");
         }
 
-        [HttpGet("create")]
-        public async Task<ActionResult> Create()
-        {
-            var categories = await _productService.GetCategoriesAsync();
-            var productViewModel = GetProductViewModel(new Product(), categories);
-            
-            return new JsonResult(productViewModel);
-        }
-
-        [HttpGet("update")]
-        public async Task<IActionResult> Update(int id)
-        {
-            var product = await _productService.GetProductByIdAsync(id);
-            var categories = await _productService.GetCategoriesAsync();
-            var productViewModel = GetProductViewModel(product, categories);
-            
-            return new JsonResult(productViewModel);
-        }
-
         private ProductViewModel GetProductViewModel(Product product, IEnumerable<Category> categories)
         {
             var productViewModel = new ProductViewModel
