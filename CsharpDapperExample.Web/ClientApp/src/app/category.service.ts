@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {Category} from "./category";
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +12,20 @@ export class CategoryService {
 
   constructor(private http:HttpClient) { }
 
-  getCategoriesList():Observable<any[]> {
+  getCategoriesList():Observable<Category[]> {
     return this.http.get<any>(this.APIUrl+'/Category')
   }
 
-  addCategory(value: any) {
+  addCategory(value: Category) {
     console.log('added');
     return this.http.post(this.APIUrl+'/Category', value);
   }
 
-  updateCategory(value: any) {
+  updateCategory(value: Category) {
     return this.http.put(this.APIUrl+'/Category', value);
   }
 
-  deleteCategory(value: any) {
+  deleteCategory(value: number) {
     return this.http.delete(this.APIUrl+'/Category/'+ value);
   }
 }

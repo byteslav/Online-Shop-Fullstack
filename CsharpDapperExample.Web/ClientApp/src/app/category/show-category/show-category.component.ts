@@ -9,10 +9,10 @@ import {Category} from "../../category";
 })
 export class ShowCategoryComponent implements OnInit {
 
-  categoriesList: any = [];
+  categoriesList: Category[] = [];
   ModalTitle: string = '';
   ActivateAddEditCategory: boolean = false;
-  category: any;
+  category!: Category;
 
   constructor(private categoryService: CategoryService) { }
 
@@ -35,7 +35,7 @@ export class ShowCategoryComponent implements OnInit {
     this.ActivateAddEditCategory = true;
   }
 
-  editClick(item: any) {
+  editClick(item: Category) {
     this.category = item;
     this.ModalTitle = 'Edit category';
     this.ActivateAddEditCategory = true;
@@ -46,7 +46,7 @@ export class ShowCategoryComponent implements OnInit {
     this.refreshCategoriesList();
   }
 
-  deleteClick(category: any) {
+  deleteClick(category: Category) {
     if(confirm('Are you sure you want delete this category?')) {
       this.categoryService.deleteCategory(category.id).subscribe(data => {
         alert(data.toString());

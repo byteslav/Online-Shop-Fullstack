@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {CategoryService} from "../../category.service";
+import {Category} from "../../category";
 
 @Component({
   selector: 'app-add-edit-category',
@@ -8,7 +9,7 @@ import {CategoryService} from "../../category.service";
 })
 export class AddEditCategoryComponent implements OnInit {
 
-  @Input() category: any;
+  @Input() category!: Category;
   CategoryId: number = 0;
   CategoryName: string = '';
 
@@ -20,7 +21,7 @@ export class AddEditCategoryComponent implements OnInit {
   }
 
   addCategory() {
-    let newCategory = { id:this.CategoryId,
+    let newCategory: Category = { id:this.CategoryId,
                   name:this.CategoryName };
     this.categoryService.addCategory(newCategory).subscribe(
       result => {
