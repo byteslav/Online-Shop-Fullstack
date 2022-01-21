@@ -1,25 +1,25 @@
 <div class="form-group row">
   <label class="col-sm-2 col-form-label">Product name</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" [(ngModel)]="ProductName"
+    <input type="text" class="form-control" [(ngModel)]="productName"
            placeholder="Enter Product name">
   </div>
 
   <label class="col-sm-2 col-form-label">Product price</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" [(ngModel)]="ProductPrice"
+    <input type="text" class="form-control" [(ngModel)]="productPrice"
            placeholder="Enter Product price">
   </div>
 
   <label class="col-sm-2 col-form-label">Product description</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" [(ngModel)]="ProductDescription"
+    <input type="text" class="form-control" [(ngModel)]="productDescription"
            placeholder="Enter Product description">
   </div>
 
   <label class="col-sm-2 col-form-label">Product category</label>
   <div class="col-sm-10">
-    <select class="form-control" [(ngModel)]="ProductCategory">
+    <select class="form-control" [(ngModel)]="productCategory">
       <option [ngValue]="null" disabled>--Select category--</option>
 
       <option *ngFor="let category of CategoryList" [ngValue]="category">

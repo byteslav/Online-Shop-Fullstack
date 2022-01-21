@@ -32,7 +32,7 @@ export class ShowProductComponent implements OnInit {
       name: '',
       price: 0,
       description: '',
-
+      categoryId: 0,
       category: {
         id: 0,
         name: ''
@@ -51,5 +51,15 @@ export class ShowProductComponent implements OnInit {
   closeClick() {
     this.ActivateAddEditProduct = false;
     this.refreshProductList();
+  }
+
+  deleteClick(product: Product) {
+    if(confirm('Are you sure you want delete this product?')) {
+      this.productService.deleteProduct(product.id).subscribe(data => {
+        alert(data.toString());
+        this.refreshProductList();
+      });
+    }
+
   }
 }

@@ -12,11 +12,12 @@ import {CategoryService} from "../../services/category.service";
 export class AddEditProductComponent implements OnInit {
 
   @Input() product!: Product;
-  ProductId: number = 0;
-  ProductName: string = '';
-  ProductPrice: number = 0;
-  ProductDescription: string = '';
-  ProductCategory!: Category;
+  productId: number = 0;
+  productName: string = '';
+  productPrice: number = 0;
+  productDescription: string = '';
+  productCategoryId: number = 0;
+  productCategory!: Category;
 
   CategoryList: Category[] = [];
 
@@ -27,22 +28,24 @@ export class AddEditProductComponent implements OnInit {
     this.categoryService.getCategoriesList().subscribe((data:Category[]) => {
       this.CategoryList = data;
 
-      this.ProductId = this.product.id;
-      this.ProductName = this.product.name;
-      this.ProductPrice = this.product.price;
-      this.ProductDescription = this.product.description;
+      this.productId = this.product.id;
+      this.productName = this.product.name;
+      this.productPrice = this.product.price;
+      this.productDescription = this.product.description;
+      this.productCategoryId = this.product.categoryId;
 
-      this.ProductCategory = this.product.category;
+      this.productCategory = this.product.category;
     });
   }
 
   updateProduct() {
     let updatedProduct: Product = {
-      id: this.ProductId,
-      name: this.ProductName,
-      price: this.ProductPrice,
-      description: this.ProductDescription,
-      category: this.ProductCategory
+      id: this.productId,
+      name: this.productName,
+      price: this.productPrice,
+      description: this.productDescription,
+      categoryId: this.productCategory.id,
+      category: this.productCategory
     };
 
     this.productService.updateProduct(updatedProduct).subscribe(
@@ -54,11 +57,12 @@ export class AddEditProductComponent implements OnInit {
 
   addProduct() {
     let newProduct: Product = {
-      id: this.ProductId,
-      name: this.ProductName,
-      price: this.ProductPrice,
-      description: this.ProductDescription,
-      category: this.ProductCategory
+      id: this.productId,
+      name: this.productName,
+      price: this.productPrice,
+      description: this.productDescription,
+      categoryId: this.productCategory.id,
+      category: this.productCategory
     };
 
     this.productService.addProduct(newProduct).subscribe(
