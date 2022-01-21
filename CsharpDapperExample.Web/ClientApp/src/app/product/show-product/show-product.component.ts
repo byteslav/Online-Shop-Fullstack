@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from "../../product.service";
+import { ProductService } from "../../services/product.service";
+import { Product } from "../../models/product";
 
 @Component({
   selector: 'app-show-product',
@@ -8,10 +9,11 @@ import {ProductService} from "../../product.service";
 })
 export class ShowProductComponent implements OnInit {
 
-  productList: any=[];
+  productList: Product[] = [];
   ModalTitle: string = '';
   ActivateAddEditProduct: boolean = false;
-  product: any;
+  product!: Product;
+
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
@@ -25,11 +27,29 @@ export class ShowProductComponent implements OnInit {
   }
 
   addClick() {
+    this.product = {
+      id: 0,
+      name: '',
+      price: 0,
+      description: '',
+
+      category: {
+        id: 0,
+        name: ''
+      }
+    }
     this.ModalTitle = 'Add Product';
     this.ActivateAddEditProduct = true;
   }
 
-  closeClick() {
+  editClick(item: Product) {
+    this.product = item;
+    this.ModalTitle = 'Edit product';
+    this.ActivateAddEditProduct = true;
+  }
 
+  closeClick() {
+    this.ActivateAddEditProduct = false;
+    this.refreshProductList();
   }
 }
