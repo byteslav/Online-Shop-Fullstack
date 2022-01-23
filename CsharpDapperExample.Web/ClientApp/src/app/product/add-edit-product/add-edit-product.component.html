@@ -1,25 +1,26 @@
-<div class="form-group row">
+<form [formGroup]="productForm">
+  <div class="form-group row">
   <label class="col-sm-2 col-form-label">Product name</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" [(ngModel)]="productName"
+    <input type="text" class="form-control" formControlName="name"
            placeholder="Enter Product name">
   </div>
 
   <label class="col-sm-2 col-form-label">Product price</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" [(ngModel)]="productPrice"
+    <input type="text" class="form-control" formControlName="price"
            placeholder="Enter Product price">
   </div>
 
   <label class="col-sm-2 col-form-label">Product description</label>
   <div class="col-sm-10">
-    <input type="text" class="form-control" [(ngModel)]="productDescription"
+    <input type="text" class="form-control" formControlName="description"
            placeholder="Enter Product description">
   </div>
 
   <label class="col-sm-2 col-form-label">Product category</label>
   <div class="col-sm-10">
-    <select class="form-control" [(ngModel)]="productCategory">
+    <select class="form-control" formControlName="category">
       <option [ngValue]="null" disabled>--Select category--</option>
 
       <option *ngFor="let category of CategoryList" [ngValue]="category">
@@ -29,7 +30,8 @@
     </select>
   </div>
 
-</div>
+  </div>
+</form>
 
 <button (click)="addProduct()" *ngIf="product.id==0" class="btn btn-primary">
   Add

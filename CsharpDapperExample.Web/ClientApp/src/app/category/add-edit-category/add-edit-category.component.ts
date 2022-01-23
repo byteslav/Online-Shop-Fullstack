@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {CategoryService} from "../../services/category.service";
 import {Category} from "../../models/category";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-add-edit-category',
@@ -10,20 +11,25 @@ import {Category} from "../../models/category";
 export class AddEditCategoryComponent implements OnInit {
 
   @Input() category!: Category;
-  CategoryId: number = 0;
-  CategoryName: string = '';
+
+  categoryForm: FormGroup = new FormGroup({
+    id: new FormControl(''),
+    name: new FormControl(''),
+  });
 
   constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
-    this.CategoryId = this.category.id;
-    this.CategoryName = this.category.name;
+    this.categoryForm.patchValue({
+      id: this.category.id,
+      name: this.category.name,
+    });
   }
 
   addCategory() {
     let newCategory: Category = {
-      id:this.CategoryId,
-      name:this.CategoryName
+      id: this.categoryForm.value.id,
+      name: this.categoryForm.value.name,
     };
 
     this.categoryService.addCategory(newCategory).subscribe(
@@ -35,8 +41,8 @@ export class AddEditCategoryComponent implements OnInit {
 
   updateCategory() {
     let updatedCategory: Category = {
-      id:this.CategoryId,
-      name:this.CategoryName
+      id: this.categoryForm.value.id,
+      name: this.categoryForm.value.name,
     };
 
     this.categoryService.updateCategory(updatedCategory).subscribe(

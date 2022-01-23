@@ -3,6 +3,7 @@ import {Product} from "../../models/product";
 import {Category} from "../../models/category";
 import {ProductService} from "../../services/product.service";
 import {CategoryService} from "../../services/category.service";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-add-edit-product',
@@ -12,40 +13,42 @@ import {CategoryService} from "../../services/category.service";
 export class AddEditProductComponent implements OnInit {
 
   @Input() product!: Product;
-  productId: number = 0;
-  productName: string = '';
-  productPrice: number = 0;
-  productDescription: string = '';
-  productCategoryId: number = 0;
-  productCategory!: Category;
-
   CategoryList: Category[] = [];
+
+  // Reactive forms
+  productForm: FormGroup = new FormGroup({
+    id: new FormControl(''),
+    name: new FormControl(''),
+    price: new FormControl(''),
+    description: new FormControl(''),
+    category: new FormControl(''),
+  });
 
   constructor(private productService: ProductService,
               private categoryService: CategoryService) { }
 
   ngOnInit(): void {
+    this.productForm.patchValue({
+      id: this.product.id,
+      name: this.product.name,
+      price: this.product.price,
+      description: this.product.description,
+      category: this.product.category,
+    });
+
     this.categoryService.getCategoriesList().subscribe((data:Category[]) => {
       this.CategoryList = data;
-
-      this.productId = this.product.id;
-      this.productName = this.product.name;
-      this.productPrice = this.product.price;
-      this.productDescription = this.product.description;
-      this.productCategoryId = this.product.categoryId;
-
-      this.productCategory = this.product.category;
     });
   }
 
   updateProduct() {
     let updatedProduct: Product = {
-      id: this.productId,
-      name: this.productName,
-      price: this.productPrice,
-      description: this.productDescription,
-      categoryId: this.productCategory.id,
-      category: this.productCategory
+      id: this.productForm.value.id,
+      name: this.productForm.value.name,
+      price: this.productForm.value.price,
+      description: this.productForm.value.description,
+      categoryId: this.productForm.value.category.id,
+      category: this.productForm.value.category
     };
 
     this.productService.updateProduct(updatedProduct).subscribe(
@@ -57,12 +60,12 @@ export class AddEditProductComponent implements OnInit {
 
   addProduct() {
     let newProduct: Product = {
-      id: this.productId,
-      name: this.productName,
-      price: this.productPrice,
-      description: this.productDescription,
-      categoryId: this.productCategory.id,
-      category: this.productCategory
+      id: this.productForm.value.id,
+      name: this.productForm.value.name,
+      price: this.productForm.value.price,
+      description: this.productForm.value.description,
+      categoryId: this.productForm.value.category.id,
+      category: this.productForm.value.category
     };
 
     this.productService.addProduct(newProduct).subscribe(
