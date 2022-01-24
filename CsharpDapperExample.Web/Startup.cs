@@ -1,4 +1,3 @@
-using AutoMapper;
 using CsharpDapperExample.BLL.Grpc.Services;
 using CsharpDapperExample.BLL.Mapper;
 using CsharpDapperExample.Extensions;
@@ -37,6 +36,7 @@ namespace CsharpDapperExample
             });
 
             services.AddGrpc();
+            services.AddCors();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -54,6 +54,8 @@ namespace CsharpDapperExample
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().WithMethods("POST"));
 
             app.UseSession();
             app.UseEndpoints(endpoints =>
