@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CsharpDapperExample.BLL.Interfaces;
 using CsharpDapperExample.Entities;
-using CsharpDapperExample.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -52,21 +51,6 @@ namespace CsharpDapperExample.Controllers
         {
             await _productService.DeleteProductAsync(id);
             return new JsonResult($"Deleted by id: {id}");
-        }
-
-        private ProductViewModel GetProductViewModel(Product product, IEnumerable<Category> categories)
-        {
-            var productViewModel = new ProductViewModel
-            {
-                Product = product,
-                CategorySelectList = categories.Select(c => new SelectListItem
-                {
-                    Text = c.Name,
-                    Value = c.Id.ToString()
-                })
-            };
-
-            return productViewModel;
         }
     }
 }
