@@ -1,8 +1,8 @@
-# <div style="text-align: center"> Csharp Dapper Example </div>
+# <div style="text-align: center"> Online Shop </div>
 
 ### :triangular_flag_on_post: *Introduction*
-I present to your attention my small backend project!
-It was created in order to improve my skills in backend development,
+I present to your attention my small <b>fullstack project</b>!
+It was created in order to improve my skills in backend development, learn Angular,
 work with important technologies and continue my way as a C# developer
 
 ____________________________________________
@@ -24,12 +24,14 @@ During the development of such a pet-project, I had time to work with some techn
 + PostgreSQL
 + Dapper micro-orm
 + Moq framework
-+ Docker
 + FluentMigrator
++ TypeScript
++ Angular
++ Docker
 
 ____________________________________________
 
-### :whale: *Docker Run Service*
+### :whale: *Docker Run Service* (not avaliable now)
 1. Clone repository with ```git clone https://github.com/azaza12345/CsharpDapperExample```
 2. Go to folder with compose file ```cd CsharpDapperExample/CsharpDapperExample.Web```
 3. Run ```docker-compose up``` in console
