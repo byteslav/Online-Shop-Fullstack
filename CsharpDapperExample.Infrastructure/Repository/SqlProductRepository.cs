@@ -20,6 +20,7 @@ namespace CsharpDapperExample.Data.Repository
         public async Task AddAsync(Product product)
         {
             using IDbConnection dbConnection = Connection;
+            product.CategoryId = product.Category.Id;
             var sqlQuery = @"INSERT INTO products (name, price, description, categoryid) VALUES (@Name, @Price, @Description, @CategoryId)";
 
             await dbConnection.ExecuteAsync(sqlQuery, product);
@@ -61,6 +62,7 @@ namespace CsharpDapperExample.Data.Repository
         public async Task UpdateAsync(Product product)
         {
             using IDbConnection dbConnection = Connection;
+            product.CategoryId = product.Category.Id;
             var sqlQuery = @"UPDATE products SET Name = @Name, Price = @Price, Description = @Description, categoryid = @CategoryId WHERE Id = @Id";
 
             await dbConnection.QueryAsync(sqlQuery, product);

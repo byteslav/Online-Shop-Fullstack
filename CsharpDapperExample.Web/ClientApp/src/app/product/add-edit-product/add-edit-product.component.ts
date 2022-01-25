@@ -42,14 +42,7 @@ export class AddEditProductComponent implements OnInit {
   }
 
   updateProduct() {
-    let updatedProduct: Product = {
-      id: this.productForm.value.id,
-      name: this.productForm.value.name,
-      price: this.productForm.value.price,
-      description: this.productForm.value.description,
-      categoryId: this.productForm.value.category.id,
-      category: this.productForm.value.category
-    };
+    let updatedProduct: Product = this.productForm.value;
 
     this.productService.updateProduct(updatedProduct).subscribe(
       result => {
@@ -59,14 +52,7 @@ export class AddEditProductComponent implements OnInit {
   }
 
   addProduct() {
-    let newProduct: Product = {
-      id: this.productForm.value.id,
-      name: this.productForm.value.name,
-      price: this.productForm.value.price,
-      description: this.productForm.value.description,
-      categoryId: this.productForm.value.category.id,
-      category: this.productForm.value.category
-    };
+    let newProduct: Product = this.productForm.value;
 
     this.productService.addProduct(newProduct).subscribe(
       result => {

@@ -27,10 +27,7 @@ export class AddEditCategoryComponent implements OnInit {
   }
 
   addCategory() {
-    let newCategory: Category = {
-      id: this.categoryForm.value.id,
-      name: this.categoryForm.value.name,
-    };
+    let newCategory: Category = this.categoryForm.value;
 
     this.categoryService.addCategory(newCategory).subscribe(
       result => {
@@ -40,10 +37,7 @@ export class AddEditCategoryComponent implements OnInit {
   }
 
   updateCategory() {
-    let updatedCategory: Category = {
-      id: this.categoryForm.value.id,
-      name: this.categoryForm.value.name,
-    };
+    let updatedCategory: Category = this.categoryForm.value;
 
     this.categoryService.updateCategory(updatedCategory).subscribe(
       result => {
