@@ -4,6 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from "@angular/common/
 import { CategoryService } from './category.service';
 import {HttpClient} from "@angular/common/http";
 import {Category} from "../models/category";
+import {of} from "rxjs";
 
 describe('CategoryService', () => {
   let service: CategoryService;
@@ -20,29 +21,24 @@ describe('CategoryService', () => {
     httpClient = TestBed.inject(HttpClient);
   });
 
-  afterEach(() => {
-    httpMock.verify();
-  });
-
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
   it('Get all categories', () => {
-    const categories: Category[] = [{id: 3, name: 'Kek'}];
+    const mockCategories: Category[] = [{id: 3, name: 'Kek'}];
+    spyOn(httpClient, "get").and.returnValue(of(mockCategories));
 
-    service.getCategoriesList().subscribe(cat => {
-      expect(cat).toEqual(categories);
+    service.getCategoriesList().subscribe(categories => {
+      expect(categories).toEqual(mockCategories);
     });
-    const request = httpMock.expectOne('https://localhost:5001/api/Category');
-    expect(request.request.method).toEqual('GET');
   });
 
   it('Add new category', () => {
     const mockCategory: Category = {id: 123, name: 'Test category'};
 
-    service.addCategory(mockCategory).subscribe(cat => {
-      expect(cat).toEqual(mockCategory);
+    service.addCategory(mockCategory).subscribe(category => {
+      expect(category).toEqual(mockCategory);
     });
 
     const request = httpMock.expectOne('https://localhost:5001/api/Category');
@@ -53,8 +49,8 @@ describe('CategoryService', () => {
   it('Update category', () => {
     const mockCategory: Category = {id: 3, name: 'hah'};
 
-    service.updateCategory(mockCategory).subscribe(cat => {
-      expect(cat).toEqual(mockCategory);
+    service.updateCategory(mockCategory).subscribe(mockCategory => {
+      expect(mockCategory).toEqual(mockCategory);
     });
 
     const request = httpMock.expectOne('https://localhost:5001/api/Category');
