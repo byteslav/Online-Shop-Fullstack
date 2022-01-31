@@ -17,7 +17,6 @@ export class CategoryService {
   }
 
   addCategory(value: Category) {
-    console.log('added');
     return this.http.post(this.APIUrl+'/Category', value);
   }
 
@@ -26,6 +25,6 @@ export class CategoryService {
   }
 
   deleteCategory(value: number) {
-    return this.http.delete(this.APIUrl+'/Category/'+ value);
+    return this.http.delete(this.APIUrl+'/Category/' + value);
   }
 }
