@@ -2,14 +2,11 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 
 import { CategoryService } from './category.service';
-import {HttpClient} from "@angular/common/http";
 import {Category} from "../models/category";
-import {of} from "rxjs";
 
 describe('CategoryService', () => {
   let service: CategoryService;
   let httpMock: HttpTestingController;
-  let httpClient: HttpClient;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,7 +15,6 @@ describe('CategoryService', () => {
     });
     service = TestBed.inject(CategoryService);
     httpMock = TestBed.inject(HttpTestingController);
-    httpClient = TestBed.inject(HttpClient);
   });
 
   it('should be created', () => {
@@ -27,11 +23,13 @@ describe('CategoryService', () => {
 
   it('Get all categories', () => {
     const mockCategories: Category[] = [{id: 3, name: 'Kek'}];
-    spyOn(httpClient, "get").and.returnValue(of(mockCategories));
-
     service.getCategoriesList().subscribe(categories => {
-      expect(categories).toEqual(mockCategories);
+      expect(categories).toBe(mockCategories);
     });
+
+    const request = httpMock.expectOne('https://localhost:5001/api/Category');
+    expect(request.request.method).toEqual('GET');
+    request.flush(mockCategories);
   });
 
   it('Add new category', () => {

@@ -20,12 +20,6 @@ export class ShowProductComponent implements OnInit {
     this.refreshProductList();
   }
 
-  refreshProductList() {
-    this.productService.getProductsList().subscribe(data => {
-      this.productList = data;
-    });
-  }
-
   addClick() {
     this.product = {
       id: 0,
@@ -38,7 +32,7 @@ export class ShowProductComponent implements OnInit {
         name: ''
       }
     }
-    this.ModalTitle = 'Add Product';
+    this.ModalTitle = 'Add product';
     this.ActivateAddEditProduct = true;
   }
 
@@ -60,6 +54,11 @@ export class ShowProductComponent implements OnInit {
         this.refreshProductList();
       });
     }
+  }
 
+  refreshProductList() {
+    this.productService.getProductsList().subscribe(data => {
+      this.productList = data;
+    });
   }
 }

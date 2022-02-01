@@ -2,14 +2,11 @@ import { TestBed } from '@angular/core/testing';
 
 import { ProductService } from './product.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {HttpClient} from "@angular/common/http";
 import {Product} from "../models/product";
-import {of} from "rxjs";
 
 describe('SharedService', () => {
   let service: ProductService;
   let httpMock: HttpTestingController;
-  let httpClient: HttpClient;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,7 +15,6 @@ describe('SharedService', () => {
     });
     service = TestBed.inject(ProductService);
     httpMock = TestBed.inject(HttpTestingController);
-    httpClient = TestBed.inject(HttpClient);
   });
 
   it('Should be created', () => {
@@ -27,11 +23,14 @@ describe('SharedService', () => {
 
   it('Get all products', () => {
     const mockProducts: Product[] = [{id: 3, name: 'testing product', price: 100, description: 'desc', categoryId: 1, category: { id: 1, name: 'cat'}}];
-    spyOn(httpClient, "get").and.returnValue(of(mockProducts));
-
     service.getProductsList().subscribe(products => {
       expect(products).toBe(mockProducts);
     });
+
+    const request = httpMock.expectOne('https://localhost:5001/api/Product');
+    expect(request.request.method).toEqual('GET');
+
+    request.flush(mockProducts);
   });
 
   it('Add new product', () => {

@@ -20,12 +20,6 @@ export class ShowCategoryComponent implements OnInit {
     this.refreshCategoriesList();
   }
 
-  refreshCategoriesList() {
-    this.categoryService.getCategoriesList().subscribe(data => {
-      this.categoriesList = data;
-    })
-  }
-
   addClick() {
     this.category = {
       id: 0,
@@ -53,5 +47,11 @@ export class ShowCategoryComponent implements OnInit {
         this.refreshCategoriesList();
       });
     }
+  }
+
+  refreshCategoriesList() {
+    this.categoryService.getCategoriesList().subscribe(data => {
+      this.categoriesList = data;
+    })
   }
 }
