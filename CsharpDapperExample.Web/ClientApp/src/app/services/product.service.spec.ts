@@ -29,7 +29,6 @@ describe('SharedService', () => {
 
     const request = httpMock.expectOne('https://localhost:5001/api/Product');
     expect(request.request.method).toEqual('GET');
-
     request.flush(mockProducts);
   });
 

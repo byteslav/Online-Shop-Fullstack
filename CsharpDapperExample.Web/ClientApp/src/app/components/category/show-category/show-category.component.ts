@@ -52,6 +52,6 @@ export class ShowCategoryComponent implements OnInit {
   refreshCategoriesList() {
     this.categoryService.getCategoriesList().subscribe(data => {
       this.categoriesList = data;
-    })
+    });
   }
 }

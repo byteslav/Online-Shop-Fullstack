@@ -8,23 +8,23 @@ import {Product} from "../models/product";
 })
 export class ProductService {
 
-  readonly APIUrl: string = 'https://localhost:5001/api';
+  readonly APIUrl: string = 'https://localhost:5001/api/Product';
 
   constructor(private http:HttpClient) { }
 
   getProductsList():Observable<Product[]> {
-    return this.http.get<Product[]>(this.APIUrl+'/Product')
+    return this.http.get<Product[]>(this.APIUrl);
   }
 
   addProduct(value: Product) {
-    return this.http.post(this.APIUrl+'/Product', value);
+    return this.http.post(this.APIUrl, value);
   }
 
   updateProduct(value: Product) {
-    return this.http.put(this.APIUrl+'/Product', value);
+    return this.http.put(this.APIUrl, value);
   }
 
   deleteProduct(value: number) {
-    return this.http.delete(this.APIUrl+'/Product/'+ value);
+    return this.http.delete(this.APIUrl +'/'+ value);
   }
 }

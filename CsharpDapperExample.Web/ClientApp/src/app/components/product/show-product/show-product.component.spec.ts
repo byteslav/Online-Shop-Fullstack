@@ -5,10 +5,12 @@ import {Category} from "../../../models/category";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ProductService} from "../../../services/product.service";
 import {Product} from "../../../models/product";
+import {of} from "rxjs";
 
 describe('ShowProductComponent', () => {
   let component: ShowProductComponent;
   let fixture: ComponentFixture<ShowProductComponent>;
+  let productService: ProductService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -23,6 +25,8 @@ describe('ShowProductComponent', () => {
     fixture = TestBed.createComponent(ShowProductComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    productService = TestBed.inject(ProductService);
   });
 
   it('should create', () => {
@@ -55,5 +59,21 @@ describe('ShowProductComponent', () => {
     component.ActivateAddEditProduct = true;
     component.closeClick();
     expect(component.ActivateAddEditProduct).toBe(false);
+  });
+
+  it('should delete product', () => {
+    const mockCategory: Product = { id: 4, name: 'Ball', price: 10, description: 'Norm', categoryId: 2, category: {id: 2, name: 'Sport'} };
+    const mockCategories: Product[] = [{ id: 3, name: 'Boots', price: 10, description: 'Norm', categoryId: 2, category: {id: 2, name: 'Sport'} }, { id: 4, name: 'Ball', price: 10, description: 'Norm', categoryId: 2, category: {id: 2, name: 'Sport'} }];
+    spyOn(component, 'refreshProductList').and.callFake(function () {
+      component.productList = mockCategories;
+    });
+    spyOn(productService, 'deleteProduct').and.callFake(function (id: number) {
+      mockCategories.pop();
+      return of(mockCategories);
+    });
+    component.refreshProductList();
+    component.deleteClick(mockCategory);
+
+    expect(component.productList).toBe(mockCategories);
   });
 });

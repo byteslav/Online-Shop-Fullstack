@@ -22,7 +22,7 @@ describe('CategoryService', () => {
   });
 
   it('Get all categories', () => {
-    const mockCategories: Category[] = [{id: 3, name: 'Kek'}];
+    const mockCategories: Category[] = [{id: 3, name: 'Sport'}];
     service.getCategoriesList().subscribe(categories => {
       expect(categories).toBe(mockCategories);
     });
@@ -45,7 +45,7 @@ describe('CategoryService', () => {
   });
 
   it('Update category', () => {
-    const mockCategory: Category = {id: 3, name: 'hah'};
+    const mockCategory: Category = {id: 3, name: 'Groceries'};
 
     service.updateCategory(mockCategory).subscribe(mockCategory => {
       expect(mockCategory).toEqual(mockCategory);

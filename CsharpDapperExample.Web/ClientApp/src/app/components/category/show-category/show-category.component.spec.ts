@@ -4,10 +4,12 @@ import { ShowCategoryComponent } from './show-category.component';
 import {CategoryService} from "../../../services/category.service";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {Category} from "../../../models/category";
+import {of} from "rxjs";
 
 describe('ShowCategoryComponent', () => {
   let component: ShowCategoryComponent;
   let fixture: ComponentFixture<ShowCategoryComponent>;
+  let categoryService: CategoryService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,6 +24,8 @@ describe('ShowCategoryComponent', () => {
     fixture = TestBed.createComponent(ShowCategoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    categoryService = TestBed.inject(CategoryService);
   });
 
   it('should create', () => {
@@ -54,5 +58,21 @@ describe('ShowCategoryComponent', () => {
     component.ActivateAddEditCategory = true;
     component.closeClick();
     expect(component.ActivateAddEditCategory).toBe(false);
+  });
+
+  it('should delete category', () => {
+    const mockCategory: Category = { id: 3, name: 'Sport' };
+    const mockCategories: Category[] = [{ id: 1, name: 'Food' }, {id: 3, name: 'Sport'}];
+    spyOn(component, 'refreshCategoriesList').and.callFake(function () {
+      component.categoriesList = mockCategories;
+    });
+    spyOn(categoryService, 'deleteCategory').and.callFake(function (id: number) {
+      mockCategories.pop();
+      return of(mockCategories);
+    });
+    component.refreshCategoriesList();
+    component.deleteClick(mockCategory);
+
+    expect(component.categoriesList).toBe(mockCategories);
   });
 });
