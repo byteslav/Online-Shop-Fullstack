@@ -63,9 +63,7 @@ describe('ShowCategoryComponent', () => {
   it('should delete category', () => {
     const mockCategory: Category = { id: 3, name: 'Sport' };
     const mockCategories: Category[] = [{ id: 1, name: 'Food' }, {id: 3, name: 'Sport'}];
-    spyOn(component, 'refreshCategoriesList').and.callFake(function () {
-      component.categoriesList = mockCategories;
-    });
+    spyOn(categoryService, 'getCategoriesList').and.returnValue(of(mockCategories));
     spyOn(categoryService, 'deleteCategory').and.callFake(function (id: number) {
       mockCategories.pop();
       return of(mockCategories);

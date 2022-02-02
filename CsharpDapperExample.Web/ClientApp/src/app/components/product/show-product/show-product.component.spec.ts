@@ -64,9 +64,7 @@ describe('ShowProductComponent', () => {
   it('should delete product', () => {
     const mockCategory: Product = { id: 4, name: 'Ball', price: 10, description: 'Norm', categoryId: 2, category: {id: 2, name: 'Sport'} };
     const mockCategories: Product[] = [{ id: 3, name: 'Boots', price: 10, description: 'Norm', categoryId: 2, category: {id: 2, name: 'Sport'} }, { id: 4, name: 'Ball', price: 10, description: 'Norm', categoryId: 2, category: {id: 2, name: 'Sport'} }];
-    spyOn(component, 'refreshProductList').and.callFake(function () {
-      component.productList = mockCategories;
-    });
+    spyOn(productService, 'getProductsList').and.returnValue(of(mockCategories));
     spyOn(productService, 'deleteProduct').and.callFake(function (id: number) {
       mockCategories.pop();
       return of(mockCategories);
