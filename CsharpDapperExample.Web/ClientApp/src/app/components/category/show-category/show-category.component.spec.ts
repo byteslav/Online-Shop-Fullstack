@@ -33,9 +33,6 @@ describe('ShowCategoryComponent', () => {
   });
 
   it('should open Add modal window', () => {
-    expect(component.ModalTitle).toBe('');
-    expect(component.ActivateAddEditCategory).toBe(false);
-
     component.addClick();
 
     expect(component.ModalTitle).toBe('Add category');
@@ -44,8 +41,6 @@ describe('ShowCategoryComponent', () => {
 
   it('should open Edit modal window', () => {
     const mockCategory: Category = { id: 1, name: 'Food' };
-    expect(component.ModalTitle).toBe('');
-    expect(component.ActivateAddEditCategory).toBe(false);
 
     component.editClick(mockCategory);
 
@@ -63,11 +58,15 @@ describe('ShowCategoryComponent', () => {
   it('should delete category', () => {
     const mockCategory: Category = { id: 3, name: 'Sport' };
     const mockCategories: Category[] = [{ id: 1, name: 'Food' }, {id: 3, name: 'Sport'}];
+    spyOn(window, 'confirm').and.callFake(function () {
+      return true;
+    });
     spyOn(categoryService, 'getCategoriesList').and.returnValue(of(mockCategories));
     spyOn(categoryService, 'deleteCategory').and.callFake(function (id: number) {
       mockCategories.pop();
       return of(mockCategories);
     });
+
     component.refreshCategoriesList();
     component.deleteClick(mockCategory);
 

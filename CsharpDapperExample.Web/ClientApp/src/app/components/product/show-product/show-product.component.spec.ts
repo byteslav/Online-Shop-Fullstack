@@ -34,9 +34,6 @@ describe('ShowProductComponent', () => {
   });
 
   it('should open Add modal window', () => {
-    expect(component.ModalTitle).toBe('');
-    expect(component.ActivateAddEditProduct).toBe(false);
-
     component.addClick();
 
     expect(component.ModalTitle).toBe('Add product');
@@ -45,8 +42,6 @@ describe('ShowProductComponent', () => {
 
   it('should open Edit modal window', () => {
     const mockProduct: Product = { id: 1, name: 'Bread', price: 10, description: 'Tasty', categoryId: 1, category: {id:2, name: 'Food'}};
-    expect(component.ModalTitle).toBe('');
-    expect(component.ActivateAddEditProduct).toBe(false);
 
     component.editClick(mockProduct);
 
@@ -64,6 +59,9 @@ describe('ShowProductComponent', () => {
   it('should delete product', () => {
     const mockCategory: Product = { id: 4, name: 'Ball', price: 10, description: 'Norm', categoryId: 2, category: {id: 2, name: 'Sport'} };
     const mockCategories: Product[] = [{ id: 3, name: 'Boots', price: 10, description: 'Norm', categoryId: 2, category: {id: 2, name: 'Sport'} }, { id: 4, name: 'Ball', price: 10, description: 'Norm', categoryId: 2, category: {id: 2, name: 'Sport'} }];
+    spyOn(window, 'confirm').and.callFake(function () {
+      return true;
+    });
     spyOn(productService, 'getProductsList').and.returnValue(of(mockCategories));
     spyOn(productService, 'deleteProduct').and.callFake(function (id: number) {
       mockCategories.pop();
