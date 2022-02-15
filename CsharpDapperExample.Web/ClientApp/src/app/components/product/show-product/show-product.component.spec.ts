@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShowProductComponent } from './show-product.component';
-import {Category} from "../../../models/category";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {ProductService} from "../../../services/product.service";
 import {Product} from "../../../models/product";
@@ -67,6 +66,7 @@ describe('ShowProductComponent', () => {
       mockCategories.pop();
       return of(mockCategories);
     });
+    
     component.refreshProductList();
     component.deleteClick(mockCategory);
 
