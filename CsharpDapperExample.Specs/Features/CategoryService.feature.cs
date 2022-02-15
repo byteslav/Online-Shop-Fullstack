@@ -19,7 +19,7 @@ namespace CsharpDapperExample.Specs.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class ShouldImplementAllCrudOperationsWithProductsFeature : object, Xunit.IClassFixture<ShouldImplementAllCrudOperationsWithProductsFeature.FixtureData>, System.IDisposable
+    public partial class ShouldImplementAllCrudOperationsWithCategoriesFeature : object, Xunit.IClassFixture<ShouldImplementAllCrudOperationsWithCategoriesFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace CsharpDapperExample.Specs.Features
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "ProductService.feature"
+#line 1 "CategoryService.feature"
 #line hidden
         
-        public ShouldImplementAllCrudOperationsWithProductsFeature(ShouldImplementAllCrudOperationsWithProductsFeature.FixtureData fixtureData, CsharpDapperExample_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public ShouldImplementAllCrudOperationsWithCategoriesFeature(ShouldImplementAllCrudOperationsWithCategoriesFeature.FixtureData fixtureData, CsharpDapperExample_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace CsharpDapperExample.Specs.Features
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Should implement all crud operations with products", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Should implement all crud operations with categories", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,14 +80,14 @@ namespace CsharpDapperExample.Specs.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Should return all avaliable products")]
-        [Xunit.TraitAttribute("FeatureTitle", "Should implement all crud operations with products")]
-        [Xunit.TraitAttribute("Description", "Should return all avaliable products")]
-        public virtual void ShouldReturnAllAvaliableProducts()
+        [Xunit.SkippableFactAttribute(DisplayName="Should return all avaliable categories")]
+        [Xunit.TraitAttribute("FeatureTitle", "Should implement all crud operations with categories")]
+        [Xunit.TraitAttribute("Description", "Should return all avaliable categories")]
+        public virtual void ShouldReturnAllAvaliableCategories()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should return all avaliable products", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should return all avaliable categories", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 3
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -109,26 +109,26 @@ namespace CsharpDapperExample.Specs.Features
             {
                 this.ScenarioStart();
 #line 4
-        testRunner.Given("products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("categories", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
-        testRunner.When("get products using ProductService", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+        testRunner.When("get categories using CategoryService", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 6
-        testRunner.Then("products should be the same", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("categories should be the same", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Should create new product")]
-        [Xunit.TraitAttribute("FeatureTitle", "Should implement all crud operations with products")]
-        [Xunit.TraitAttribute("Description", "Should create new product")]
-        public virtual void ShouldCreateNewProduct()
+        [Xunit.SkippableFactAttribute(DisplayName="Should create new category")]
+        [Xunit.TraitAttribute("FeatureTitle", "Should implement all crud operations with categories")]
+        [Xunit.TraitAttribute("Description", "Should create new category")]
+        public virtual void ShouldCreateNewCategory()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should create new product", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should create new category", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 8
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -150,26 +150,26 @@ namespace CsharpDapperExample.Specs.Features
             {
                 this.ScenarioStart();
 #line 9
-        testRunner.Given("new product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("new category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 10
-        testRunner.When("create new product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+        testRunner.When("create new category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 11
-        testRunner.Then("product should be created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("category should be created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Should update product")]
-        [Xunit.TraitAttribute("FeatureTitle", "Should implement all crud operations with products")]
-        [Xunit.TraitAttribute("Description", "Should update product")]
-        public virtual void ShouldUpdateProduct()
+        [Xunit.SkippableFactAttribute(DisplayName="Should update category")]
+        [Xunit.TraitAttribute("FeatureTitle", "Should implement all crud operations with categories")]
+        [Xunit.TraitAttribute("Description", "Should update category")]
+        public virtual void ShouldUpdateCategory()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should update product", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Should update category", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 13
     this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -191,13 +191,13 @@ namespace CsharpDapperExample.Specs.Features
             {
                 this.ScenarioStart();
 #line 14
-        testRunner.Given("old and new products", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+        testRunner.Given("old and new categories", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 15
-        testRunner.When("update an existing product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+        testRunner.When("update an existing category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 16
-        testRunner.Then("product should be updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+        testRunner.Then("category should be updated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -210,12 +210,12 @@ namespace CsharpDapperExample.Specs.Features
             
             public FixtureData()
             {
-                ShouldImplementAllCrudOperationsWithProductsFeature.FeatureSetup();
+                ShouldImplementAllCrudOperationsWithCategoriesFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                ShouldImplementAllCrudOperationsWithProductsFeature.FeatureTearDown();
+                ShouldImplementAllCrudOperationsWithCategoriesFeature.FeatureTearDown();
             }
         }
     }

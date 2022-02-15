@@ -8,7 +8,7 @@ using Moq;
 using TechTalk.SpecFlow;
 using Xunit;
 
-namespace CsharpDapperExample.Specs
+namespace CsharpDapperExample.Specs.Steps
 {
     [Binding]
     public class ProductServiceStepDefinitions
